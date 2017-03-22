@@ -24,8 +24,8 @@ if has('autocmd') && !exists('autocommands_loaded')
     autocmd BufNewFile,BufReadPost *.md set filetype=markdown
     let g:markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'json=javascript', 'stylus', 'html']
 
-		" Remove whitespace for all files when saving
-		autocmd BufWritePre * :%s/\s\+$//e
+	" Remove whitespace for all files when saving
+	autocmd BufWritePre * :%s/\s\+$//e
 
     autocmd! BufWritePost * Neomake
 endif
@@ -158,4 +158,13 @@ if executable('ag')
 	let g:ctrlp_use_caching = 0
 
 	nnoremap \ :Ag<SPACE>
+endif
+
+" fzf-specific settings
+if executable('fzf') && has('nvim')
+	map <silent> <leader>b :Buffers<CR>
+	map <silent> <leader>f :Files<CR>
+	map <silent> <leader>g :GFiles<CR>
+	map <silent> <leader>l :Lines<CR>
+	map <silent> <leader>s :Snippets<CR>
 endif

@@ -17,7 +17,6 @@ endif
 " Plugins
 call plug#begin('~/.vim/plugged')
 
-Plug 'kien/ctrlp.vim'
 Plug 'mwistrand/vim-predawn'
 Plug 'chriskempson/base16-vim'
 Plug 'rking/ag.vim'
@@ -57,5 +56,12 @@ Plug 'tpope/vim-markdown', { 'for': 'markdown' }
 if executable('go')
 	Plug 'fatih/vim-go', { 'for': 'go' }
 end
+
+if executable('fzf') && has('nvim')
+	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+	Plug 'junegunn/fzf.vim'
+else
+	Plug 'kien/ctrlp.vim'
+endif
 
 call plug#end()
