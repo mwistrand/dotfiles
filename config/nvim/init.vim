@@ -166,5 +166,5 @@ if executable('fzf') && has('nvim')
 	map <silent> <leader>f :Files<CR>
 	map <silent> <leader>g :GFiles<CR>
 	map <silent> <leader>l :Lines<CR>
-	map <silent> <leader>s :Snippets<CR>
+	map <silent> <leader>s :BLines<CR>
 endif
