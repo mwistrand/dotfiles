@@ -38,7 +38,7 @@ Plug 'ElmCast/elm-vim'
 " Language-specific plugins
 Plug 'gregsexton/MatchTag', { 'for': 'html' }
 Plug 'othree/html5.vim', { 'for': 'html' }
-Plug 'mattn/emmet-vim', { 'for': 'html' }
+" Plug 'mattn/emmet-vim', { 'for': 'html' }
 Plug 'ap/vim-css-color', { 'for': 'css' }
 Plug 'hail2u/vim-css3-syntax', { 'for': 'css' }
 Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
