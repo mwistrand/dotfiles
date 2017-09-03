@@ -34,6 +34,7 @@ Plug 'tpope/vim-surround'
 Plug 'ervandew/supertab'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'ElmCast/elm-vim'
+Plug 'valloric/youcompleteme'
 
 " Language-specific plugins
 Plug 'gregsexton/MatchTag', { 'for': 'html' }
