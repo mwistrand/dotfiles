@@ -44,6 +44,9 @@ highlight NonText ctermbg=none ctermfg=8
 highlight Comment cterm=italic
 highlight htmlArg cterm=italic
 
+" allow modified buffers to be hidden
+set hidden
+
 " Tab control
 set noexpandtab " insert tabs rather than spaces for <Tab>
 set smarttab " tab respects 'tabstop', 'shiftwidth', and 'softtabstop'
@@ -162,10 +165,10 @@ endif
 
 " fzf-specific settings
 if executable('fzf') && has('nvim')
-	map <silent> <leader>b :Buffers<CR>
 	map <silent> <leader>f :Files<CR>
 	map <silent> <leader>g :GFiles<CR>
 	map <silent> <leader>l :Lines<CR>
+	map <silent> <leader>r :Buffers<CR>
 	map <silent> <leader>s :BLines<CR>
 endif
 
