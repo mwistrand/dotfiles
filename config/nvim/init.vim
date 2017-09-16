@@ -55,6 +55,7 @@ set softtabstop=4 " edit as if the tabs are 4 characters wide
 set shiftwidth=4 " number of spaces to use for indent and unindent
 set shiftround " round indent to a multiple of 'shiftwidth'
 set completeopt+=longest
+set completeopt-=preview " Disable the autocomplete preview window
 
 " code folding settings
 set foldmethod=syntax " fold based on indent
