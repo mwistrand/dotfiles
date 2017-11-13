@@ -189,3 +189,6 @@ let g:ycm_filetype_blacklist = {
     \ 'mail' : 1,
     \ 'gitcommit': 1
 \ }
+
+" UltiSnips
+let g:UltiSnipsExpandTrigger = '<c-j>'

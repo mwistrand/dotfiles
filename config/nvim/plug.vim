@@ -28,13 +28,14 @@ Plug 'benekastah/neomake'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-commentary'
 Plug 'PeterRincker/vim-argumentative'
-Plug 'Raimondi/delimitMate'
+Plug 'vim-scripts/Auto-Pairs'
 Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-surround'
 Plug 'ervandew/supertab'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'ElmCast/elm-vim'
 Plug 'valloric/youcompleteme'
+Plug 'SirVer/ultisnips'
 
 " Language-specific plugins
 Plug 'gregsexton/MatchTag', { 'for': 'html' }
@@ -47,7 +48,6 @@ Plug 'wavded/vim-stylus', { 'for': ['stylus', 'markdown'] }
 Plug 'groenewege/vim-less', { 'for': 'less' }
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-Plug 'jason0x43/vim-tss', { 'for': 'typescript', 'do': 'npm install' }
 Plug 'jason0x43/vim-js-indent', { 'for': [ 'javascript', 'typescript', 'html', 'jsp' ] }
 Plug 'jason0x43/vim-js-syntax', { 'for': [ 'javascript', 'html' ] }
 Plug 'mxw/vim-jsx', { 'for': 'jsx' }
