@@ -38,6 +38,8 @@ Plug 'valloric/youcompleteme'
 Plug 'SirVer/ultisnips'
 
 " Language-specific plugins
+Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
+Plug 'kien/rainbow_parentheses.vim', { 'for': 'clojure' }
 Plug 'gregsexton/MatchTag', { 'for': 'html' }
 Plug 'othree/html5.vim', { 'for': 'html' }
 " Plug 'mattn/emmet-vim', { 'for': 'html' }
