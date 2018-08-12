@@ -35,3 +35,13 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
 if [[ -a ~/.zshrc_local ]]; then
     source ~/.zshrc_local
 fi
+
+# Git aliases
+alias gac="git add . && git commit"
+alias gl="git l"
+alias gs="git status"
+
+# tmux aliases
+alias ta="tmux attach"
+alias tls="tmux ls"
+alias ts="tmux new-session -s"
