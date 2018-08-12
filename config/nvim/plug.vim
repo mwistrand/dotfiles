@@ -29,6 +29,7 @@ Plug 'mhinz/vim-signify'
 Plug 'mwistrand/vim-predawn'
 Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sleuth'
@@ -67,5 +68,8 @@ if executable('fzf') && has('nvim')
 else
 	Plug 'kien/ctrlp.vim'
 endif
+
+" Needs to be loaded at the end
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
