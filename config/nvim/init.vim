@@ -32,9 +32,14 @@ endif
 
 syntax on
 set encoding=utf-8
-let base16colorspace=256
-set background=dark
-colorscheme predawn
+
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+else
+    set background=dark
+    colorscheme predawn
+endif
 
 " make the highlighting of tabs and other non-text less annoying
 highlight SpecialKey ctermbg=none ctermfg=8
