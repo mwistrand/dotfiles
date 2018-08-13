@@ -6,7 +6,7 @@ if has('autocmd') && !exists('autocommands_loaded')
     autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
     autocmd FileType ruby setlocal ts=2 sts=2 sw=2 expandtab
     autocmd FileType html setlocal ts=2 sts=2 sw=2 noexpandtab indentkeys-=*<return>
-    autocmd FileType markdown,textile setlocal textwidth=0 wrapmargin=0 wrap spell
+    autocmd FileType markdown,textile setlocal textwidth=0 wrapmargin=0 wrap
     autocmd FileType .xml exe ":silent %!xmllint --format --recover - 2>/dev/null"
     autocmd FileType crontab setlocal nobackup nowritebackup
 
