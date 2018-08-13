@@ -38,3 +38,15 @@ do
 		fi
 	fi
 done
+
+# Install homebrew packages on macOS
+if [ "$(uname)" == "Darwin" ]; then
+    echo -e "\\n\\nRunning on macOS"
+	echo "Install homebrew packages?"
+	select yn in "Yes" "No"; do
+		case $yn in
+			Yes ) source install/brew.sh; break;;
+			No ) exit;;
+		esac
+	done
+fi
