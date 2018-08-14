@@ -59,14 +59,14 @@ Plug 'tpope/vim-markdown', { 'for': 'markdown' }
 Plug 'wavded/vim-stylus', { 'for': ['stylus', 'markdown'] }
 
 if executable('go')
-	Plug 'fatih/vim-go', { 'for': 'go' }
+    Plug 'fatih/vim-go', { 'for': 'go' }
 end
 
 if executable('fzf') && has('nvim')
-	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-	Plug 'junegunn/fzf.vim'
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf.vim'
 else
-	Plug 'kien/ctrlp.vim'
+    Plug 'kien/ctrlp.vim'
 endif
 
 " Needs to be loaded at the end

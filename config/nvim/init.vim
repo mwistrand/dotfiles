@@ -16,6 +16,7 @@ if has('autocmd') && !exists('autocommands_loaded')
     autocmd BufNewFile,BufRead *.ejs set filetype=html
     autocmd BufNewFile,BufRead *.ino set filetype=c
     autocmd BufNewFile,BufRead *.svg set filetype=xml
+    autocmd BufNewFile,BufRead *.dojorc* set filetype=json
 
     " make quickfix windows take all the lower section of the screen when there
     " are multiple windows open
