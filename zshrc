@@ -14,7 +14,7 @@ if command_exists rbenv; then
 fi
 
 # Display the cwd
-export PS1="%1d $ "
+export PS1="%1d %% "
 
 export EDITOR='nvim'
 export GIT_EDITOR='nvim'
