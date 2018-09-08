@@ -131,6 +131,8 @@ let g:NERDTreeQuitOnOpen=1
 let NERDTreeShowHidden=1
 " remove some files by extension
 let NERDTreeIgnore = ['\.js.map$']
+" Set the default NERDTree width
+:let g:NERDTreeWinSize=50
 " Toggle NERDTree
 nmap <silent> <leader>k :NERDTreeToggle<cr>
 " expand to the path of the file in the current buffer
