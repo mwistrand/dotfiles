@@ -133,10 +133,19 @@ let NERDTreeShowHidden=1
 let NERDTreeIgnore = ['\.js.map$']
 " Set the default NERDTree width
 :let g:NERDTreeWinSize=50
+
+function! ToggleNerdTree()
+  if @% != "" && (!exists("g:NERDTree") || (!g:NERDTree.IsOpen()))
+      :NERDTreeFind
+  else
+      :NERDTreeToggle
+  endif
+endfunction
+
 " Toggle NERDTree
-nmap <silent> <leader>k :NERDTreeToggle<cr>
+nmap <silent> <leader>k :call ToggleNerdTree()<cr>
 " expand to the path of the file in the current buffer
-nmap <silent> <leader>y :NERDTreeFind<cr>
+nmap <silent> <leader>n :NERDTreeFind<cr>
 
 let g:neomake_javascript_jshint_maker = {
     \ 'args': ['--verbose'],
