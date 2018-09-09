@@ -11,7 +11,10 @@ echo -e "\\n\\nInstalling homebrew packages..."
 echo "=============================="
 
 formulas=(
+    bat
     clojure
+    diff-so-fancy
+    fd
     go
     maven
     fzf
