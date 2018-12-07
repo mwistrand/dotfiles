@@ -129,8 +129,6 @@ let mapleader=','
 let g:NERDTreeQuitOnOpen=1
 " show hidden files in NERDTree
 let NERDTreeShowHidden=1
-" remove some files by extension
-let NERDTreeIgnore = ['\.js.map$']
 " Set the default NERDTree width
 :let g:NERDTreeWinSize=50
 
