@@ -25,6 +25,9 @@ export GIT_EDITOR='nvim'
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# iced repl
+export PATH=$PATH:$HOME/.vim/plugged/vim-iced/bin
+
 # Base16 Shell
 BASE16_SHELL="$HOME/.config/base16-shell/"
 [ -n "$PS1" ] && \
