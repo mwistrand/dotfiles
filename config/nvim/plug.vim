@@ -17,7 +17,6 @@ endif
 " Plugins
 call plug#begin('~/.vim/plugged')
 
-Plug 'ElmCast/elm-vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'PeterRincker/vim-argumentative'
 Plug 'SirVer/ultisnips'
@@ -25,8 +24,9 @@ Plug 'benekastah/neomake'
 Plug 'chriskempson/base16-vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'ervandew/supertab'
+Plug 'LandonSchropp/vim-stamp'
 Plug 'mhinz/vim-signify'
-Plug 'mwistrand/vim-predawn'
+" Plug 'mwistrand/vim-predawn'
 Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
