@@ -23,6 +23,7 @@ formulas=(
     neovim
     nginx
     node
+    postgresql
     python
     python3
     the_silver_searcher
