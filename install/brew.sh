@@ -29,6 +29,7 @@ formulas=(
     the_silver_searcher
     tmux
     vim
+    yarn
     zplug
     zsh
 )
