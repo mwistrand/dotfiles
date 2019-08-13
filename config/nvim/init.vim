@@ -200,6 +200,8 @@ endif
 " coc settings
 let g:coc_global_extensions = [
 \ 'coc-css',
+\ 'coc-eslint',
+\ 'coc-tslint-plugin',
 \ 'coc-json',
 \ 'coc-tsserver'
 \ ]
