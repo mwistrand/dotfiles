@@ -198,4 +198,4 @@ let g:ycm_filetype_blacklist = {
 \ }
 
 " UltiSnips
-let g:UltiSnipsExpandTrigger = '<c-j>'
+let g:UltiSnipsExpandTrigger = '<C-l>'
