@@ -199,11 +199,18 @@ endif
 "
 " coc settings
 let g:coc_global_extensions = [
+\ 'coc-angular',
 \ 'coc-css',
+\ 'coc-emmet',
+\ 'coc-emoji',
 \ 'coc-eslint',
-\ 'coc-tslint-plugin',
+\ 'coc-jest',
 \ 'coc-json',
-\ 'coc-tsserver'
+\ 'coc-pairs',
+\ 'coc-svg',
+\ 'coc-tslint-plugin',
+\ 'coc-tsserver',
+\ 'coc-yaml',
 \ ]
 
 " UltiSnips

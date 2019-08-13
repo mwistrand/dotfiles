@@ -39,7 +39,6 @@ Plug 'tpope/vim-surround'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'vim-scripts/Auto-Pairs'
 
 " Language-specific plugins
 Plug 'ap/vim-css-color', { 'for': 'css' }
