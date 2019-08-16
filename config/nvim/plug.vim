@@ -48,12 +48,12 @@ Plug 'gregsexton/MatchTag', { 'for': 'html' }
 Plug 'groenewege/vim-less', { 'for': 'less' }
 Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
 Plug 'hail2u/vim-css3-syntax', { 'for': 'css' }
+Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'typescript.tsx'] }
 Plug 'ianks/vim-tsx'
 Plug 'itspriddle/vim-marked', { 'for': 'markdown', 'on': 'MarkedOpen' }
 Plug 'jason0x43/vim-js-indent', { 'for': [ 'javascript', 'typescript', 'html', 'jsp' ] }
 Plug 'jason0x43/vim-js-syntax', { 'for': [ 'javascript', 'html' ] }
 Plug 'kien/rainbow_parentheses.vim', { 'for': 'clojure' }
-Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'typescript.tsx'] }
 Plug 'mattn/emmet-vim'
 Plug 'mxw/vim-jsx', { 'for': 'jsx' }
 Plug 'othree/html5.vim', { 'for': 'html' }
