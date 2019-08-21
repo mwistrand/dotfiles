@@ -46,7 +46,7 @@ Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
 Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'gregsexton/MatchTag', { 'for': 'html' }
 Plug 'groenewege/vim-less', { 'for': 'less' }
-Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
+" Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
 Plug 'hail2u/vim-css3-syntax', { 'for': 'css' }
 Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'typescript.tsx'] }
 Plug 'ianks/vim-tsx'
@@ -58,7 +58,10 @@ Plug 'mattn/emmet-vim'
 Plug 'mxw/vim-jsx', { 'for': 'jsx' }
 Plug 'othree/html5.vim', { 'for': 'html' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-Plug 'tpope/vim-fireplace', { 'for': 'clojure', 'on': 'FireplaceConnect' }
+" Plug 'tpope/vim-fireplace', { 'for': 'clojure', 'on': 'FireplaceConnect' }
+Plug 'guns/vim-sexp', { 'for': 'clojure' }
+" Plug 'kovisoft/paredit', {'for': ['clojure']}
+Plug 'liquidz/vim-iced', { 'for': 'clojure' }
 Plug 'tpope/vim-markdown', { 'for': 'markdown' }
 Plug 'wavded/vim-stylus', { 'for': ['stylus', 'markdown'] }
 
