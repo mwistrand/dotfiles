@@ -215,6 +215,3 @@ let g:coc_global_extensions = [
 
 " UltiSnips
 let g:UltiSnipsExpandTrigger = '<C-l>'
-
-" vim-iced settings
-let g:iced_enable_default_key_mappings = 1
