@@ -19,7 +19,7 @@
   silent! nmap <buffer> <Leader>ts <Plug>(iced_test_spec_check)
   silent! nmap <buffer> <Leader>to <Plug>(iced_test_buffer_open)
   silent! nmap <buffer> <Leader>tn <Plug>(iced_test_ns)
-  silent! nmap <buffer> <Leader>tp <Plug>(iced_test_all)
+  silent! nmap <buffer> <Leader>ta <Plug>(iced_test_all)
   silent! nmap <buffer> <Leader>tr <Plug>(iced_test_redo)
 
   "" Help/Document (<Leader>h)
