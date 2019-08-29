@@ -163,10 +163,10 @@ if executable('ag')
 	set grepprg=ag\ --nogroup\ --nocolor
 
 	" Use ag in CtrlP for listing files
-	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+	" let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
 	" ag is fast enough that CtrlP doesn't need to cache
-	let g:ctrlp_use_caching = 0
+	" let g:ctrlp_use_caching = 0
 
 	nnoremap \ :Ag<SPACE>
 endif
@@ -212,6 +212,19 @@ let g:coc_global_extensions = [
 \ 'coc-tsserver',
 \ 'coc-yaml',
 \ ]
+
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
 " UltiSnips
 let g:UltiSnipsExpandTrigger = '<C-l>'

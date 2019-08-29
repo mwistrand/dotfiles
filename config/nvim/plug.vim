@@ -23,7 +23,6 @@ Plug 'SirVer/ultisnips'
 Plug 'benekastah/neomake'
 Plug 'chriskempson/base16-vim'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'ervandew/supertab'
 Plug 'LandonSchropp/vim-stamp'
 Plug 'mhinz/vim-signify'
 " Plug 'mwistrand/vim-predawn'
@@ -35,7 +34,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
-" Plug 'valloric/youcompleteme'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -53,7 +51,7 @@ Plug 'ianks/vim-tsx'
 Plug 'itspriddle/vim-marked', { 'for': 'markdown', 'on': 'MarkedOpen' }
 Plug 'jason0x43/vim-js-indent', { 'for': [ 'javascript', 'typescript', 'html', 'jsp' ] }
 Plug 'jason0x43/vim-js-syntax', { 'for': [ 'javascript', 'html' ] }
-Plug 'kien/rainbow_parentheses.vim', { 'for': 'clojure' }
+" Plug 'kien/rainbow_parentheses.vim', { 'for': 'clojure' }
 Plug 'mattn/emmet-vim'
 Plug 'mxw/vim-jsx', { 'for': 'jsx' }
 Plug 'othree/html5.vim', { 'for': 'html' }
