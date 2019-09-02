@@ -44,4 +44,13 @@
 
   "" Misc
   silent! nmap <buffer> == <Plug>(iced_format)
+  silent! nmap <buffer> =G <Plug>(iced_clean_all)
+
+  "" Clean and format on save
+  function! CleanAll()
+    if iced#nrepl#is_connected()
+      call iced#nrepl#refactor#clean_all()
+    endif
+  endfunction
+  autocmd BufWrite * silent! call CleanAll()
 "" }}}
