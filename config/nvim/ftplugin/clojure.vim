@@ -5,6 +5,8 @@
   silent! nmap <buffer> <Leader>eq <Plug>(iced_interrupt)
   silent! nmap <buffer> <Leader>ei <Plug>(iced_eval)<Plug>(sexp_inner_element)``
   silent! nmap <buffer> <Leader>ee <Plug>(iced_eval)<Plug>(sexp_outer_list)``
+  silent! nmap <buffer> <Leader>et <Plug>(iced_eval_outer_top_list)
+  silent! nmap <buffer> <Leader>en <Plug>(iced_eval_ns)
   silent! vmap <buffer> <Leader>ee <Plug>(iced_eval_visual)
   silent! nmap <buffer> <Leader>ep <Plug>(iced_print_last)
   silent! nmap <buffer> <Leader>eb <Plug>(iced_require)
