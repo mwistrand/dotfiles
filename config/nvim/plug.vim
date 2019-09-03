@@ -59,6 +59,7 @@ Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 " Plug 'tpope/vim-fireplace', { 'for': 'clojure', 'on': 'FireplaceConnect' }
 Plug 'guns/vim-sexp', { 'for': 'clojure' }
 " Plug 'kovisoft/paredit', {'for': ['clojure']}
+Plug 'bhurlow/vim-parinfer', {'for': ['clojure']}
 Plug 'liquidz/vim-iced', { 'for': 'clojure' }
 Plug 'tpope/vim-markdown', { 'for': 'markdown' }
 Plug 'wavded/vim-stylus', { 'for': ['stylus', 'markdown'] }
