@@ -20,7 +20,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'PeterRincker/vim-argumentative'
 Plug 'SirVer/ultisnips'
-Plug 'benekastah/neomake'
+Plug 'neomake/neomake'
 Plug 'chriskempson/base16-vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'LandonSchropp/vim-stamp'
