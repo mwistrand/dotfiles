@@ -107,9 +107,6 @@ call plug#begin('~/.vim/plugged')
 "" }}}
 
 "" General Plugins {{{
-  "" TODO: is this still needed?
-  Plug 'MarcWeber/vim-addon-mw-utils'
-
   "" colorschemes
   Plug 'chriskempson/base16-vim'
   Plug 'mwistrand/vim-predawn'
