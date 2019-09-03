@@ -102,8 +102,6 @@ call plug#begin('~/.vim/plugged')
 
       " Remove whitespace for all files when saving
       autocmd BufWritePre * :%s/\s\+$//e
-
-      autocmd! BufWritePost * Neomake
     augroup END
   "" }}}
 "" }}}
@@ -115,14 +113,6 @@ call plug#begin('~/.vim/plugged')
   "" colorschemes
   Plug 'chriskempson/base16-vim'
   Plug 'mwistrand/vim-predawn'
-
-  "" Neomake {{{
-  Plug 'neomake/neomake'
-  let g:neomake_javascript_jshint_maker = {
-    \ 'args': ['--verbose'],
-    \ 'errorformat': '%A%f: line %l\, col %v\, %m \(%t%*\d\)',
-    \ }
-  "" }}}
 
   "" Motions to swap argument order
   Plug 'PeterRincker/vim-argumentative'
