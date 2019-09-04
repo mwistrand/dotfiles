@@ -301,10 +301,10 @@ call plug#begin('~/.vim/plugged')
       " Plug 'kien/rainbow_parentheses.vim', { 'for': 'clojure' }
       " Plug 'tpope/vim-fireplace', { 'for': 'clojure', 'on': 'FireplaceConnect' }
       " Plug 'kovisoft/paredit', {'for': ['clojure']}
+      " Plug 'bhurlow/vim-parinfer', {'for': ['clojure']}
     "" }}}
 
     Plug 'guns/vim-sexp', { 'for': 'clojure' }
-    Plug 'bhurlow/vim-parinfer', {'for': ['clojure']}
     Plug 'liquidz/vim-iced', { 'for': 'clojure' }
   "" }}}
 
