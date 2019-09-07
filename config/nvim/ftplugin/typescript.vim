@@ -1,3 +1,3 @@
 "" coc.nvim mappings {{{
-  silent! nmap <Leader>c :CocRestart<cr>
+  silent! nmap <LocalLeader>c :CocRestart<cr>
 "" }}}

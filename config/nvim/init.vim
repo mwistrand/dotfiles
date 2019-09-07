@@ -85,8 +85,10 @@ call plug#begin('~/.vim/plugged')
   nnoremap ^ <nop>
   nnoremap $ <nop>
 
-  " leader is a comma
+  " General mappings are triggered with a comma, while mappings that are file
+  " type-specific are triggered with a colon.
   let mapleader=','
+  let maplocalleader=';'
 
   "" file type specific settings {{{
     augroup AutoCmdSettings
