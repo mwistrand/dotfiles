@@ -301,7 +301,6 @@ call plug#begin('~/.vim/plugged')
 
   "" TypeScript {{{
     Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'typescript.tsx'] }
-    Plug 'ianks/vim-tsx'
   "" }}}
 
   "" Clojure {{{
