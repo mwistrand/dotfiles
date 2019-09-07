@@ -168,11 +168,11 @@ call plug#begin('~/.vim/plugged')
       let g:ctrlp_switch_buffer = 0
 
       if executable('ag')
-				" Use ag in CtrlP for listing files
-				let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+	" Use ag in CtrlP for listing files
+	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
-				" ag is fast enough that CtrlP doesn't need to cache
-				let g:ctrlp_use_caching = 0
+	" ag is fast enough that CtrlP doesn't need to cache
+	let g:ctrlp_use_caching = 0
       endif
     endif
   "" }}}
@@ -287,12 +287,13 @@ call plug#begin('~/.vim/plugged')
 
   "" JavaScript {{{
     Plug 'elzr/vim-json', { 'for': 'json' }
+    Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'html'] }
+    Plug 'MaxMEllon/vim-jsx-pretty'
+  "" }}}
+
+  "" TypeScript {{{
     Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'typescript.tsx'] }
     Plug 'ianks/vim-tsx'
-    Plug 'jason0x43/vim-js-indent', { 'for': [ 'javascript', 'typescript', 'html', 'jsp' ] }
-    Plug 'jason0x43/vim-js-syntax', { 'for': [ 'javascript', 'html' ] }
-    Plug 'mxw/vim-jsx', { 'for': 'jsx' }
-    Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
   "" }}}
 
   "" Clojure {{{
