@@ -90,9 +90,15 @@ call plug#begin('~/.vim/plugged')
   let mapleader=','
   let maplocalleader=';'
 
+  " Open the (n)vim config from anywhere
+  noremap <Leader>ev :e! $MYVIMRC<cr>
+
   "" file type specific settings {{{
     augroup AutoCmdSettings
       autocmd!
+
+      " Reload vim config on save
+      autocmd BufWritePost .vimrc,init.vim source %
 
       " save all files on focus lost, ignoring warnings about untitled buffers
       autocmd FocusLost * silent! wa
