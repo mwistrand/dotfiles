@@ -1,0 +1,6 @@
+dotfiles.txt	dotfiles.txt	/*dotfiles.txt*
+my-basics	dotfiles.txt	/*my-basics*
+my-clojure	dotfiles.txt	/*my-clojure*
+my-coc.nvim	dotfiles.txt	/*my-coc.nvim*
+my-help	dotfiles.txt	/*my-help*
+my-search	dotfiles.txt	/*my-search*

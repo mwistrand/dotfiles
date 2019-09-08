@@ -93,6 +93,11 @@ call plug#begin('~/.vim/plugged')
   " Open the (n)vim config from anywhere
   noremap <Leader>ev :e! $MYVIMRC<cr>
 
+  " Quickly generate the help tags for this repo
+  map <Leader>hs :helptags $HOME/.dotfiles/config/nvim/doc<cr>
+  " View the cheatsheet for this repo
+  map <Leader>hh :h dotfiles<cr>
+
   "" file type specific settings {{{
     augroup AutoCmdSettings
       autocmd!

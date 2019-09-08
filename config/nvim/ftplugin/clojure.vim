@@ -29,7 +29,6 @@
   "" Testing (<LocalLeader>t)
   silent! nmap <buffer> <LocalLeader>tt <Plug>(iced_test_under_cursor)
   silent! nmap <buffer> <LocalLeader>tl <Plug>(iced_test_rerun_last)
-  silent! nmap <buffer> <LocalLeader>ts <Plug>(iced_test_spec_check)
   silent! nmap <buffer> <LocalLeader>to <Plug>(iced_test_buffer_open)
   silent! nmap <buffer> <LocalLeader>tn <Plug>(iced_test_ns)
   silent! nmap <buffer> <LocalLeader>ta <Plug>(iced_test_all)
@@ -41,12 +40,6 @@
   silent! nmap <buffer> <LocalLeader>hs <Plug>(iced_popup_source_show)
   silent! nmap <buffer> <LocalLeader>hc <Plug>(iced_clojuredocs_open)
   silent! nmap <buffer> <LocalLeader>hh <Plug>(iced_command_palette)
-
-  "" Browsing (<LocalLeader>b)
-  silent! nmap <buffer> <LocalLeader>bs <Plug>(iced_browse_spec)
-  silent! nmap <buffer> <LocalLeader>bt <Plug>(iced_browse_test_under_cursor)
-  silent! nmap <buffer> <LocalLeader>br <Plug>(iced_browse_references)
-  silent! nmap <buffer> <LocalLeader>bd <Plug>(iced_browse_dependencies)
 
   "" Jumping cursor (<LocalLeader>j)
   silent! nmap <buffer> <C-]> <Plug>(iced_def_jump)
