@@ -3,7 +3,7 @@ call functions#PlugCheck()
 " Plugins
 call plug#begin('~/.vim/plugged')
 
-"" General .vimrc/init.vim settings {{{
+"" General Vim settings {{{
 	syntax on
 	set encoding=utf-8
 
