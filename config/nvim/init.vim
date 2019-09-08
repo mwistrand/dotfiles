@@ -216,6 +216,7 @@ call plug#begin('~/.vim/plugged')
       \ 'coc-jest',
       \ 'coc-json',
       \ 'coc-pairs',
+      \ 'coc-prettier',
       \ 'coc-svg',
       \ 'coc-tslint-plugin',
       \ 'coc-tsserver',

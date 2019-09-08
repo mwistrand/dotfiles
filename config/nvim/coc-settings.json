@@ -1,8 +1,10 @@
 {
-    "suggest.maxCompleteItemCount": 20,
-    "eslint.filetypes": ["javascript", "typescript", "typescriptreact", "javascriptreact", "typescript.tsx"],
+    "coc.preferences.formatOnSaveFiletypes": ["javascript", "javascriptreact", "typescript", "typescriptreact", "typescript.tsx"],
     "diagnostic.errorSign": "✖",
-    "diagnostic.warningSign": "⚠",
+    "diagnostic.hintSign": "○",
     "diagnostic.infoSign": "●",
-    "diagnostic.hintSign": "○"
+    "diagnostic.warningSign": "⚠",
+    "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact", "typescript.tsx"],
+    "prettier.onlyUseLocalVersion": true,
+    "suggest.maxCompleteItemCount": 20
 }
