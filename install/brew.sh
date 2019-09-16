@@ -26,6 +26,7 @@ formulas=(
     postgresql
     python
     python3
+    rust
     the_silver_searcher
     tmux
     vim
