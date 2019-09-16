@@ -48,3 +48,7 @@ alias gs="git status"
 alias ta="tmux attach"
 alias tls="tmux ls"
 alias ts="tmux new-session -s"
+
+# neovim aliases
+# Temporarily map nvim until https://github.com/Homebrew/homebrew-core/issues/44324 is resolved.
+alias nvim="nvim 2> /dev/null"
