@@ -15,6 +15,7 @@ formulas=(
     clojure
     diff-so-fancy
     fd
+    fnm
     go
     maven
     fzf

@@ -98,6 +98,13 @@ call plug#begin('~/.vim/plugged')
 	" View the cheatsheet for this repo
 	map <Leader>hh :h dotfiles<cr>
 
+	map <Leader>tt :tabe<cr>
+	map <Leader>tf :tabfirst<cr>
+	map <Leader>tc :tabclose<cr>
+	map <Leader>to :tabonly<cr>
+
+	map <Leader><Leader> :b#<cr>
+
 	"" file type specific settings {{{
 		augroup AutoCmdSettings
 			autocmd!
@@ -213,7 +220,6 @@ call plug#begin('~/.vim/plugged')
 
 		" coc settings
 		let g:coc_global_extensions = [
-			\ 'coc-angular',
 			\ 'coc-css',
 			\ 'coc-emmet',
 			\ 'coc-emoji',
@@ -295,7 +301,6 @@ call plug#begin('~/.vim/plugged')
 		Plug 'gregsexton/MatchTag', { 'for': 'html' }
 		Plug 'itspriddle/vim-marked', { 'for': 'markdown', 'on': 'MarkedOpen' }
 		Plug 'tpope/vim-markdown', { 'for': 'markdown' }
-		Plug 'mattn/emmet-vim'
 		Plug 'othree/html5.vim', { 'for': 'html' }
 	"" }}}
 
