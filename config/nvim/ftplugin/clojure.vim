@@ -50,11 +50,11 @@
   silent! nmap <buffer> == <Plug>(iced_format)
   silent! nmap <buffer> =G <Plug>(iced_clean_all)
 
-  "" Clean and format on save
-  function! CleanAll()
+  "" format on save
+  function! FormatAll()
     if iced#nrepl#is_connected()
-      call iced#nrepl#refactor#clean_all()
+      call iced#format#all()
     endif
   endfunction
-  autocmd BufWrite * silent! call CleanAll()
+  autocmd BufWrite * silent! call FormatAll()
 "" }}}
