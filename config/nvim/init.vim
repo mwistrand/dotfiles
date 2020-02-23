@@ -156,45 +156,13 @@ call plug#begin('~/.vim/plugged')
 	"" Use motions to easily change surrounding characters/tags
 	Plug 'tpope/vim-surround'
 
-	"" Silver searcher {{{
-		Plug 'rking/ag.vim'
-
-		let g:ag_working_path_mode="r"
-
-		if executable('ag')
-			" Use ag over grep
-			set grepprg=ag\ --nogroup\ --nocolor
-
-			nnoremap \ :Ag<SPACE>
-		endif
-	"" }}}
-
-	"" File/buffer search settings: fzf with ctrlp fallback {{{
-	if executable('fzf') && has('nvim')
+	"" File/buffer search settings: fzf {{{
 		Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 		Plug 'junegunn/fzf.vim'
 
-		map <silent> <leader>f :Files<CR>
-		map <silent> <leader>g :GFiles<CR>
 		map <silent> <leader>l :Lines<CR>
 		map <silent> <leader>r :Buffers<CR>
 		map <silent> <leader>s :BLines<CR>
-	else
-		Plug 'kien/ctrlp.vim'
-
-		" Use project directory as root for CtrlP
-		let g:ctrlp_working_path_mode = 'ra'
-		" Open files in a new buffer
-		let g:ctrlp_switch_buffer = 0
-
-		if executable('ag')
-			" Use ag in CtrlP for listing files
-			let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-			" ag is fast enough that CtrlP doesn't need to cache
-			let g:ctrlp_use_caching = 0
-		endif
-	endif
 	"" }}}
 
 	"" YouCompleteMe graveyard {{{
@@ -335,6 +303,27 @@ call plug#begin('~/.vim/plugged')
 "" }}}
 
 call plug#end()
+
+"" ripgrep {{{
+	if executable('rg')
+		command! -bang -nargs=* Find call fzf#vim#grep(
+			\ 'rg --smart-case --column --line-number --no-heading --follow --color=always '.<q-args>, 1,
+			\ <bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%:hidden', '?'), <bang>0)
+
+		command! -bang -nargs=? -complete=dir Files
+			\ call fzf#vim#files(<q-args>, fzf#vim#with_preview('right:50%', '?'), <bang>0)
+
+		command! -bang -nargs=? -complete=dir GitFiles
+			\ call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview('right:50%', '?'), <bang>0)
+
+		" Use ripgrep over grep
+		set grepprg=rg\ --vimgrep
+
+		nnoremap \ :Find<SPACE>
+		map <silent> <leader>f :Files<CR>
+		map <silent> <leader>g :GitFiles<CR>
+	end
+"" }}}
 
 "" Must be placed after plug#end to ensure colorscheme is set correctly.
 if filereadable(expand("~/.vimrc_background"))

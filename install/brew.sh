@@ -27,8 +27,8 @@ formulas=(
     postgresql
     python
     python3
+    ripgrep
     rust
-    the_silver_searcher
     tmux
     vim
     yarn
