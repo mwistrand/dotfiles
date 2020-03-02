@@ -35,7 +35,7 @@
   silent! nmap <buffer> <LocalLeader>tr <Plug>(iced_test_redo)
 
   "" Help/Document (<LocalLeader>h)
-  silent! nmap <buffer> K <Plug>(iced_popup_document_open)
+  silent! nmap <buffer> K <Plug>(iced_document_popup_open)
   silent! nmap <buffer> <LocalLeader>hq <Plug>(iced_document_close)
   silent! nmap <buffer> <LocalLeader>hs <Plug>(iced_popup_source_show)
   silent! nmap <buffer> <LocalLeader>hc <Plug>(iced_clojuredocs_open)
