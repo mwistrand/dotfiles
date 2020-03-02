@@ -12,7 +12,7 @@ echo "=============================="
 
 formulas=(
     bat
-    clojure
+    clojure/tools/clojure
     diff-so-fancy
     fd
     fnm
