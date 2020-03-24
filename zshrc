@@ -43,6 +43,7 @@ fi
 alias gac="git add . && git commit"
 alias gl="git l"
 alias gs="git status"
+alias gb="git branch --show-current"
 
 # tmux aliases
 alias ta="tmux attach"
