@@ -37,7 +37,7 @@
   "" Help/Document (<LocalLeader>h)
   silent! nmap <buffer> K <Plug>(iced_document_popup_open)
   silent! nmap <buffer> <LocalLeader>hq <Plug>(iced_document_close)
-  silent! nmap <buffer> <LocalLeader>hs <Plug>(iced_popup_source_show)
+  silent! nmap <buffer> <LocalLeader>hs <Plug>(iced_source_popup_show)
   silent! nmap <buffer> <LocalLeader>hc <Plug>(iced_clojuredocs_open)
   silent! nmap <buffer> <LocalLeader>hh <Plug>(iced_command_palette)
 
