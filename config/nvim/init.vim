@@ -222,9 +222,9 @@ call plug#begin('~/.vim/plugged')
 	"" }}}
 
 	"" UltiSnips {{{
-		Plug 'SirVer/ultisnips'
+		" Plug 'SirVer/ultisnips'
 
-		let g:UltiSnipsExpandTrigger = '<C-l>'
+		" let g:UltiSnipsExpandTrigger = '<C-l>'
 	"" }}}
 
 	"" NERDTree {{{
