@@ -293,6 +293,8 @@ call plug#begin('~/.vim/plugged')
 
 			Plug 'guns/vim-sexp', { 'for': 'clojure' }
 			Plug 'liquidz/vim-iced', { 'for': 'clojure' }
+
+			let g:iced#buffer#stdout#mods = 'rightbelow'
 	"" }}}
 
 	"" Go {{{
