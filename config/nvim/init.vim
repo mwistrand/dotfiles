@@ -184,7 +184,7 @@ call plug#begin('~/.vim/plugged')
 	"" }}}
 
 	"" coc.nvim {{{
-		Plug 'neoclide/coc.nvim', {'branch': 'release', 'for': ['javascript', 'typescript', 'typescript.tsx']}
+		Plug 'neoclide/coc.nvim', {'branch': 'release', 'for': ['javascript', 'typescript', 'typescript.tsx', 'css']}
 
 		" coc settings
 		let g:coc_global_extensions = [
