@@ -1,5 +1,7 @@
 "" vim-iced mappings {{{
   silent! nmap <buffer> <LocalLeader>c <Plug>(iced_connect)
+	" command -nargs=1 Shadow execute ":IcedStartCljsRepl shadow-cljs" <q-args>
+	command! -nargs=1 Cljs execute ":IcedStartCljsRepl shadow-cljs" <q-args>
 
   "" Evaluating (<LocalLeader>e)
   silent! nmap <buffer> <LocalLeader>eq <Plug>(iced_interrupt)

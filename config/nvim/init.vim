@@ -295,6 +295,8 @@ call plug#begin('~/.vim/plugged')
 			Plug 'liquidz/vim-iced', { 'for': 'clojure' }
 
 			let g:iced#buffer#stdout#mods = 'rightbelow'
+			let g:iced#cljs#default_env = 'shadow-cljs'
+			let g:iced#nrepl#auto#does_switch_session = 'true'
 	"" }}}
 
 	"" Go {{{
