@@ -131,6 +131,9 @@ call plug#begin('~/.vim/plugged')
 	Plug 'chriskempson/base16-vim'
 	Plug 'mwistrand/vim-predawn'
 
+	"" ctags
+	Plug 'ludovicchabant/vim-gutentags'
+
 	"" Motions to swap argument order
 	Plug 'PeterRincker/vim-argumentative'
 

@@ -11,5 +11,5 @@
   silent! nmap <silent> <LocalLeader>ri :CocCommand java.action.organizeImports<cr>
 
   "" navigation commands
-  silent! nmap <silent> <C-]> Plug(coc-definition)
+  silent! nmap <silent> <LocalLeader>gd Plug(coc-definition)
 "" }}}

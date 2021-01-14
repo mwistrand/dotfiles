@@ -10,46 +10,15 @@ fi
 echo -e "\\n\\nInstalling homebrew packages..."
 echo "=============================="
 
-formulas=(
-    bat
-    clojure/tools/clojure
-    diff-so-fancy
-    fd
-    fnm
-    go
-    maven
-    fzf
-    git
-    hugo
-    neovim
-    nginx
-    node
-    postgresql
-    python3
-    ripgrep
-    rust
-    tmux
-    vim
-    yarn
-    zplug
-    zsh
-)
+# install brew dependencies from Brewfile
+brew bundle
 
-for formula in "${formulas[@]}"; do
-    formula_name=$( echo "$formula" | awk '{print $1}' )
-    if brew list "$formula_name" > /dev/null 2>&1; then
-        echo "$formula_name already installed... skipping."
-    else
-        brew install "$formula"
-    fi
-done
-
-# After the install, setup fzf
+# After the install, setup fzf...
 echo -e "\\n\\nRunning fzf install script..."
 echo "=============================="
-/usr/local/opt/fzf/install --all --no-bash --no-fish
+"$(brew --prefix)"/opt/fzf/install --key-bindings --completion --no-update-rc --no-bash --no-fish
 
-# after hte install, install neovim python libraries
+# ...and install neovim python libraries
 echo -e "\\n\\nRunning Neovim Python install"
 echo "=============================="
 pip3 install --user neovim

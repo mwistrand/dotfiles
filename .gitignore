@@ -1,2 +1,4 @@
 plug.vim.old
 config/nvim/autoload/plug.vim
+tags
+Brewfile.lock.json
