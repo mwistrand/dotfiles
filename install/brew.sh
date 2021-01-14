@@ -25,7 +25,6 @@ formulas=(
     nginx
     node
     postgresql
-    python
     python3
     ripgrep
     rust

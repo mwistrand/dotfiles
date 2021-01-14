@@ -184,7 +184,7 @@ call plug#begin('~/.vim/plugged')
 	"" }}}
 
 	"" coc.nvim {{{
-		Plug 'neoclide/coc.nvim', {'branch': 'release', 'for': ['javascript', 'typescript', 'typescript.tsx', 'css']}
+		Plug 'neoclide/coc.nvim', {'branch': 'release', 'for': ['javascript', 'typescript', 'typescript.tsx', 'css', 'java']}
 
 		" coc settings
 		let g:coc_global_extensions = [
@@ -192,6 +192,7 @@ call plug#begin('~/.vim/plugged')
 			\ 'coc-emmet',
 			\ 'coc-emoji',
 			\ 'coc-eslint',
+			\ 'coc-java',
 			\ 'coc-jest',
 			\ 'coc-json',
 			\ 'coc-pairs',
