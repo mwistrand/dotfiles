@@ -18,9 +18,8 @@
   silent! nmap <buffer> <LocalLeader>em <Plug>(iced_macroexpand_1_outer_list)
 
   "" REPL buffer (<LocalLeader>s)
-  silent! nmap <buffer> <LocalLeader>ss <Plug>(iced_stdout_buffer_open)
-  silent! nmap <buffer> <LocalLeader>sq <Plug>(iced_stdout_buffer_close)
-  silent! nmap <buffer> <LocalLeader>sl <Plug>(iced_stdout_buffer_clear)
+  silent! nmap <buffer> <LocalLeader>bb <Plug>(iced_stdout_buffer_toggle)
+  silent! nmap <buffer> <LocalLeader>bc <Plug>(iced_stdout_buffer_clear)
 
   "" Refactoring (<LocalLeader>r)
   silent! nmap <buffer> <LocalLeader>rcn <Plug>(iced_clean_ns)
