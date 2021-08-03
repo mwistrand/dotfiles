@@ -1,6 +1,6 @@
 "" coc.nvim mappings {{{
-  silent! nmap <LocalLeader>c :CocRestart<cr>
-  silent! nmap <silent> <LocalLeader>x :CocCommand java.clean.workspace<cr>
+  silent! nmap <silent> <LocalLeader>c :CocCommand java.clean.workspace<cr>
+  silent! nmap <silent> <LocalLeader>l :CocCommand java.open.serverLog<cr>
 
   "" compilation commands
   silent! nmap <silent> <LocalLeader>jc :!javac %<CR>
@@ -12,4 +12,11 @@
 
   "" navigation commands
   silent! nmap <silent> <LocalLeader>gd Plug(coc-definition)
+
+  "" test commands (requires on vim-test)
+  silent! nmap <silent> <LocalLeader>tn :TestNearest<cr>
+  silent! nmap <silent> <LocalLeader>tf :TestFile<cr>
+  silent! nmap <silent> <LocalLeader>ts :TestSuite<cr>
+  silent! nmap <silent> <LocalLeader>tl :TestLast<cr>
+  silent! nmap <silent> <LocalLeader>tg :TestVisit<cr>
 "" }}}

@@ -303,6 +303,10 @@ call plug#begin('~/.vim/plugged')
 			let g:iced#nrepl#auto#does_switch_session = 'true'
 	"" }}}
 
+	"" Java {{{
+			Plug 'vim-test/vim-test', { 'for': 'java' }
+	"" }}}
+
 	"" Go {{{
 		if executable('go')
 			Plug 'fatih/vim-go', { 'for': 'go' }
