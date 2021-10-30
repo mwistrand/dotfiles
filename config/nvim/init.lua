@@ -1,7 +1,9 @@
 local cmd = vim.cmd
 local env = vim.env
+local g = vim.g
 local o = vim.o
 local opt = vim.opt
+local utils = require('utils')
 
 -- Appearnce
 o.termguicolors = true
@@ -59,6 +61,18 @@ opt.shell = env.SHELL
 -- Error bells
 opt.errorbells = false
 opt.visualbell = true
+
+-- Scroll the viewport faster
+utils.nnoremap('<C-e>', '3<C-e>')
+utils.nnoremap('<C-y>', '3<C-y>')
+
+-- General mappings are triggered with a comma, while mappings that are file
+-- type-specific are triggered with a colon.
+g.mapleader = ','
+g.maplocalleader = ';'
+
+-- Buffer navigation
+utils.map('<Leader><Leader>', ':b#<cr>')
 
 require('plugins')
 
