@@ -1,6 +1,7 @@
 local cmd = vim.cmd
 local fn = vim.fn
-local g = vim
+local g = vim.g
+local opt = vim.opt
 local utils = require('utils')
 
 local plugLoad = fn['functions#PlugLoad']
@@ -39,10 +40,6 @@ cmd [[Plug 'tpope/vim-surround']]
 -- File/buffer search settings: fzf
 cmd [[Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }]]
 cmd [[Plug 'junegunn/fzf.vim']]
-
-utils.map('<leader>l', ':Lines<CR>')
-utils.map('<leader>r', ':Buffers<CR>')
-utils.map('<leader>s', ':BLines<CR>')
 
 -- coc.nvim
 cmd [[Plug 'neoclide/coc.nvim', {'branch': 'release', 'for': ['javascript', 'typescript', 'typescript.tsx', 'css', 'java']}]]
@@ -91,6 +88,11 @@ end
 
 plugEnd()
 
+if fn.executable('rg') then
+	opt.grepprg = 'rg --vimgrep'
+end
+
 require('plugins.coc')
 require('plugins.formatter')
+require('plugins.fzf')
 require('plugins.nerdtree')
