@@ -1,5 +1,6 @@
 local cmd = vim.cmd
 local fn = vim.fn
+local g = vim
 local utils = require('utils')
 
 local plugLoad = fn['functions#PlugLoad']
@@ -43,6 +44,9 @@ utils.map('<leader>l', ':Lines<CR>')
 utils.map('<leader>r', ':Buffers<CR>')
 utils.map('<leader>s', ':BLines<CR>')
 
+-- coc.nvim
+cmd [[Plug 'neoclide/coc.nvim', {'branch': 'release', 'for': ['javascript', 'typescript', 'typescript.tsx', 'css', 'java']}]]
+
 -- File tree
 cmd [[Plug 'kyazdani42/nvim-web-devicons']]
 cmd [[Plug 'kyazdani42/nvim-tree.lua']]
@@ -73,9 +77,9 @@ cmd [[Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'typescript.tsx
 cmd [[Plug 'guns/vim-sexp', { 'for': 'clojure' }]]
 cmd [[Plug 'liquidz/vim-iced', { 'for': 'clojure' }]]
 
--- let g:iced#buffer#stdout#mods = 'rightbelow'
--- let g:iced#cljs#default_env = 'shadow-cljs'
--- let g:iced#nrepl#auto#does_switch_session = 'true'
+g['iced#buffer#stdout#mods'] = 'rightbelow'
+g['iced#cljs#default_env'] = 'shadow-cljs'
+g['iced#nrepl#auto#does_switch_session'] = 'true'
 
 -- Java
 cmd [[Plug 'vim-test/vim-test', { 'for': 'java' }]]
@@ -87,5 +91,6 @@ end
 
 plugEnd()
 
+require('plugins.coc')
 require('plugins.formatter')
 require('plugins.nerdtree')
