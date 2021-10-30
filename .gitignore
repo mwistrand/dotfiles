@@ -1,7 +1,9 @@
+.DS_Store
 npm-debug.log
 
 tags
 plug.vim.old
+config/nvim/plugged
 config/nvim/autoload/plug.vim
 
 Brewfile.lock.json
