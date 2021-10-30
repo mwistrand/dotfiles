@@ -1,3 +1,4 @@
+local fn = vim.fn
 local g = vim.g
 local utils = require('utils')
 
@@ -29,7 +30,7 @@ local function check_back_space()
 end
 
 -- h/t https://github.com/smauel/dotfiles/blob/master/nvim/lua/config/coc.lua
-local function CocSmartTab()
+function CocSmartTab()
   if fn.pumvisible() == 1 then
     return termcodes('<C-n>')
   elseif fn['coc#expandableOrJumpable']() == 1 then
@@ -49,12 +50,12 @@ end
 -- Else, if the character before the cursor isn't whitespace, put a Tab.
 -- Else, refresh the completion list
 --inoremap('<TAB>', 'v:lua.CocSmartTab()', {silent = true, expr = true})
-utils.inoremap('<Tab>', 'v:lua.CocSmartTab()', { expr = true })
+-- utils.inoremap('<Tab>', 'v:lua.CocSmartTab()', { expr = true })
 
 -- Shift-Tab for cycling backwards through matches in a completion popup
 --inoremap('<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<C-h>"', {silent = true, expr = true})
-utils.inoremap('<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<C-h>"', { expr = true })
+-- utils.inoremap('<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<C-h>"', { expr = true })
 
 -- Enter to confirm completion
 --inoremap('<CR>', 'pumvisible() ? "\\<C-y>" : "\\<CR>"', {silent = true, expr = true})
-utils.inoremap('<CR>', 'pumvisible() ? "\\<C-y>" : "\\<CR>"', { expr = true })
+-- utils.inoremap('<CR>', 'pumvisible() ? "\\<C-y>" : "\\<CR>"', { expr = true })
