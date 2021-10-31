@@ -16,7 +16,8 @@ symlink_files_in_dir() {
 		mkdir -p "$HOME/.${name}"
 	fi
 
-	files=$(find "$DOTFILES/${name}" -maxdepth 1 2>/dev/null)
+	src="$DOTFILES/${name}"
+	files=$(find "${src}" -maxdepth 1 -not -path "${src}" 2>/dev/null)
 	for file in $files; do
 	    target="$HOME/.${name}/$(basename "$file")"
 	    if [ -e "$target" ]; then
