@@ -1,5 +1,6 @@
 local cmd = vim.cmd
 local env = vim.env
+local fn = vim.fn
 local g = vim.g
 local o = vim.o
 local opt = vim.opt
@@ -76,4 +77,9 @@ utils.map('<Leader><Leader>', ':b#<cr>')
 
 require('plugins')
 
-cmd('colorscheme dracula')
+if fn.filereadable(fn.expand('~/.vimrc_background')) then
+    g.base16colorspace = 256
+    cmd [[source ~/.vimrc_background]]
+else
+  cmd('colorscheme dracula')
+end
