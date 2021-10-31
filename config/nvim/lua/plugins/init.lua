@@ -49,6 +49,9 @@ cmd [[Plug 'neoclide/coc.nvim', {'branch': 'release', 'for': ['javascript', 'typ
 cmd [[Plug 'kyazdani42/nvim-web-devicons']]
 cmd [[Plug 'kyazdani42/nvim-tree.lua']]
 
+-- Status bar
+cmd [[Plug 'nvim-lualine/lualine.nvim']]
+
 -- Language-specific plugins
 -- CSS
 cmd [[Plug 'ap/vim-css-color', { 'for': 'css' }]]
@@ -96,4 +99,5 @@ end
 require('plugins.coc')
 require('plugins.formatter')
 require('plugins.fzf')
-require('plugins.nerdtree')
+require('plugins.lualine')
+require('plugins.nvimtree')
