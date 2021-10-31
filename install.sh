@@ -9,7 +9,6 @@ get_symlinks() {
 symlink_files_in_dir() {
 	name=${1}
 
-	echo -e
 	echo "installing to ~/.${name}"
 	if [ ! -d "$HOME/.${name}" ]; then
 		echo "Creating ~/.${name}"
@@ -73,5 +72,11 @@ install_brew_packages() {
 	fi
 }
 
+fix_terminfo() {
+	echo -e "Fixing italics in tmux..."
+	tic -x "$DOTFILES/terminfo/italics.terminfo"
+}
+
 create_symlinks
+fix_terminfo
 install_brew_packages
