@@ -3,7 +3,7 @@
 DOTFILES="$(pwd)"
 
 get_symlinks() {
-	find -H "$DOTFILES" -maxdepth 1 -name "*.symlink"
+	find -H "$DOTFILES" -maxdepth 2 -name "*.symlink"
 }
 
 create_symlinks() {

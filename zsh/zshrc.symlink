@@ -1,5 +1,11 @@
 #!/bin/zsh
 
+source $DOTFILES/zsh/common.zsh
+
+if [[ -d $DOTFILES/zsh/functions ]]; then
+    for func in $DOTFILES/zsh/functions/*(:t); autoload -U $func
+fi
+
 ## Set JAVA_HOME
 . ~/.asdf/plugins/java/set-java-home.zsh
 
@@ -15,11 +21,6 @@ export GIT_EDITOR='nvim'
 # iced repl
 export PATH=$PATH:$HOME/.vim/plugged/vim-iced/bin
 
-# Import the local zshrc if it exists
-if [[ -a ~/.zshrc_local ]]; then
-    source ~/.zshrc_local
-fi
-
 # Git aliases
 alias gac="git add . && git commit"
 alias gs="git status"
@@ -27,3 +28,9 @@ alias gb="git branch --show-current"
 
 # fnm
 eval "$(fnm env --multi)"
+
+# plugins
+zfetch $ZPLUGDIR chriskempson/base16-shell
+
+base16_shell=$ZPLUGDIR/chriskempson/base16-shell
+eval "$($base16_shell/profile_helper.sh)"

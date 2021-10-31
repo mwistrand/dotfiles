@@ -14,6 +14,7 @@ plugBegin('~/.config/nvim/plugged')
 
 -- Colorschemes
 cmd [[Plug 'dracula/vim']]
+cmd [[Plug 'RRethy/nvim-base16']]
 
 -- Toggle comments with gcc
 cmd [[Plug 'tpope/vim-commentary']]

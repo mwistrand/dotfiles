@@ -1,0 +1,13 @@
+#!/bin/zsh
+
+export DOTFILES="$(dirname "$(dirname "$(readlink "${(%):-%N}")")")"
+
+fpath=(
+    $DOTFILES/zsh/functions
+    $fpath
+)
+
+# Import the local zshrc if it exists
+if [[ -a ~/.zshrc_local ]]; then
+    source ~/.zshrc_local
+fi
