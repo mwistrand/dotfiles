@@ -6,6 +6,28 @@ get_symlinks() {
 	find -H "$DOTFILES" -maxdepth 2 -name "*.symlink"
 }
 
+symlink_files_in_dir() {
+	name=${1}
+
+	echo -e
+	echo "installing to ~/.${name}"
+	if [ ! -d "$HOME/.${name}" ]; then
+		echo "Creating ~/.${name}"
+		mkdir -p "$HOME/.${name}"
+	fi
+
+	files=$(find "$DOTFILES/${name}" -maxdepth 1 2>/dev/null)
+	for file in $files; do
+	    target="$HOME/.${name}/$(basename "$file")"
+	    if [ -e "$target" ]; then
+			echo "~${target#$HOME} already exists... Skipping."
+	    else
+			echo "Creating symlink for $file"
+			ln -s "$file" "$target"
+	    fi
+	done
+}
+
 create_symlinks() {
 	echo -e "Creating symlinks..."
 
@@ -19,23 +41,8 @@ create_symlinks() {
 		fi
 	done
 
-	echo -e
-	echo "installing to ~/.config"
-	if [ ! -d "$HOME/.config" ]; then
-		echo "Creating ~/.config"
-		mkdir -p "$HOME/.config"
-	fi
-
-	config_files=$(find "$DOTFILES/config" -maxdepth 1 2>/dev/null)
-	for config in $config_files; do
-	    target="$HOME/.config/$(basename "$config")"
-	    if [ -e "$target" ]; then
-			echo "~${target#$HOME} already exists... Skipping."
-	    else
-			echo "Creating symlink for $config"
-			ln -s "$config" "$target"
-	    fi
-	done
+	symlink_files_in_dir "config"
+	symlink_files_in_dir "clojure"
 }
 
 install_brew_packages() {
