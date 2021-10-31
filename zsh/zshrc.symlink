@@ -6,6 +6,12 @@ if [[ -d $DOTFILES/zsh/functions ]]; then
     for func in $DOTFILES/zsh/functions/*(:t); autoload -U $func
 fi
 
+if [ -z "$TMUX" ]; then
+    export TERM=xterm-256color-italic
+else
+    export TERM=tmux-256color
+fi
+
 ## Set JAVA_HOME
 . ~/.asdf/plugins/java/set-java-home.zsh
 
