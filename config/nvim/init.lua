@@ -15,6 +15,7 @@ opt.number = true -- show line numbers
 opt.scrolloff = 5 -- min number of lines to show above/below cursor while scrolling
 opt.showcmd = true -- show (partial) commands in status line
 opt.showmatch = true -- briefly highlight matching bracket on insert
+opt.showmode = false -- don't show the mode since it's displayed by the status line plugin
 opt.textwidth = 120 -- wrap line after specified number of characters
 opt.title = true -- let vim set title of terminal window
 opt.wrap = true -- enable line wrapping
