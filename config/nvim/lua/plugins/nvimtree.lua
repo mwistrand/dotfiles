@@ -35,11 +35,14 @@ vim.g.nvim_tree_icons = {
   }
 }
 
+-- Flatten directories that have only a single folder; useful for JVM projects
+vim.g.nvim_tree_group_empty = 1
+
 function NvimTreeConfig.find_toggle()
   if view.win_open() then
     view.close()
   else
-    vim.cmd('NvimTreeFindFile')
+    vim.cmd('NvimTreeToggle')
   end
 end
 
