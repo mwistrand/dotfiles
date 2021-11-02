@@ -34,3 +34,6 @@ brew "vim"
 brew "yarn"
 brew "zplug"
 brew "zsh"
+
+tap "spring-io/tap"
+brew "spring-boot"
