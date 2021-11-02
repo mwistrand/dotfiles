@@ -1,6 +1,11 @@
 if OS.mac?
 	tap "homebrew/cask"
+	tap "homebrew/cask-fonts"
 
+	# Fonts
+	cask "font-jetbrains-mono"
+
+	# Applications
 	cask "kitty"
 end
 
