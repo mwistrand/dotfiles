@@ -32,6 +32,9 @@ alias gac="git add . && git commit"
 alias gs="git status"
 alias gb="git branch --show-current"
 
+# Show doftiles help doc
+alias hdoc="bat ~/.config/help/dotfiles.txt"
+
 # fnm
 eval "$(fnm env --multi)"
 
