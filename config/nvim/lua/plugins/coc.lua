@@ -2,6 +2,10 @@ local fn = vim.fn
 local g = vim.g
 local utils = require('utils')
 
+local function termcodes(str)
+  return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
+
 -- coc settings
 g.coc_global_extensions = {
   'coc-css',
@@ -49,13 +53,10 @@ end
 -- Else, if the cursor is in an active snippet, tab between fields.
 -- Else, if the character before the cursor isn't whitespace, put a Tab.
 -- Else, refresh the completion list
---inoremap('<TAB>', 'v:lua.CocSmartTab()', {silent = true, expr = true})
--- utils.inoremap('<Tab>', 'v:lua.CocSmartTab()', { expr = true })
+utils.inoremap('<Tab>', 'v:lua.CocSmartTab()', { expr = true })
 
 -- Shift-Tab for cycling backwards through matches in a completion popup
---inoremap('<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<C-h>"', {silent = true, expr = true})
--- utils.inoremap('<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<C-h>"', { expr = true })
+utils.inoremap('<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<C-h>"', { expr = true })
 
 -- Enter to confirm completion
---inoremap('<CR>', 'pumvisible() ? "\\<C-y>" : "\\<CR>"', {silent = true, expr = true})
--- utils.inoremap('<CR>', 'pumvisible() ? "\\<C-y>" : "\\<CR>"', { expr = true })
+utils.inoremap('<CR>', 'pumvisible() ? "\\<C-y>" : "\\<CR>"', { expr = true })
