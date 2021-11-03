@@ -1,0 +1,17 @@
+{
+    "diagnostic.errorSign": "✖",
+    "diagnostic.hintSign": "○",
+    "diagnostic.infoSign": "●",
+    "diagnostic.warningSign": "⚠",
+    "prettier.onlyUseLocalVersion": true,
+    "suggest.maxCompleteItemCount": 20,
+    "java.jdt.ls.vmargs": "-javaagent:\"/usr/local/share/lombok.jar\"",
+    "java.completion.favoriteStaticMembers": [
+        "org.junit.jupiter.api.*",
+        "org.assertj.core.api.Assertions.*",
+        "org.mockito.Mockito.*",
+        "org.mockito.BDDMockito.*",
+        "org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*",
+        "org.springframework.test.web.servlet.result.MockMvcResultMatchers.*"
+    ]
+}
