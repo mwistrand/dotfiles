@@ -24,6 +24,7 @@ opt.wrapmargin = 4 -- wrap line after specified number of characters from edge
 opt.mouse = 'a' -- allow the mouse in all modes
 
 -- Buffer management
+o.hidden = true -- allow hidden buffers with unsaved work
 opt.backup = false -- disable backups when saving files
 opt.swapfile = false -- don't create swap files
 opt.timeoutlen = 1000 -- mapped sequence timeout

@@ -10,6 +10,9 @@
   silent! nmap <silent> <LocalLeader>rn <Plug>(coc-rename)
   silent! nmap <silent> <LocalLeader>ri :CocCommand java.action.organizeImports<cr>
 
+  silent! nmap <silent> <LocalLeader>ac <Plug>(coc-codeaction)
+  silent! nmap <silent> <LocalLeader>qf <Plug>(coc-fix-current)
+
   "" navigation commands
   silent! nmap <silent> <LocalLeader>gd Plug(coc-definition)
 
