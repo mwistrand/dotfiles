@@ -1,0 +1,39 @@
+{
+  "class": {
+    "prefix": "class",
+    "body": [
+      "package $1",
+      "",
+      "public class $TM_FILENAME_BASE {",
+      "}"
+    ]
+  },
+  "interface": {
+    "prefix": "interface",
+    "body": [
+      "package $1",
+      "",
+      "public interface $TM_FILENAME_BASE {",
+      "}"
+    ]
+  },
+  "mockito": {
+    "prefix": "mockito",
+    "description": "Generate a unit test class that uses Mockito",
+    "body": [
+      "package $1",
+      "",
+      "import static org.mockito.Mockito.when;",
+      "",
+      "import org.junit.jupiter.api.Test;",
+      "import org.junit.jupiter.api.extension.ExtendWith;",
+      "import org.mockito.InjectMocks;",
+      "import org.mockito.Mock;",
+      "import org.mockito.junit.jupiter.MockitoExtension;",
+      "",
+      "@ExtendWith(MockitoExtension.class)",
+      "public class $TM_FILENAME_BASE {",
+      "}"
+    ]
+  }
+}

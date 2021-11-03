@@ -39,6 +39,13 @@ cmd [[Plug 'tpope/vim-repeat']]
 -- Use motions to easily change surrounding characters/tags
 cmd [[Plug 'tpope/vim-surround']]
 
+cmd [[Plug 'hrsh7th/vim-vsnip']]
+cmd [[Plug 'hrsh7th/vim-vsnip-integ']]
+local snippets_dir = os.getenv("DOTFILES") .. "/config/nvim/vsnip"
+g.vsnip_snippet_dir = snippets_dir
+utils.imap('<C-j>',"vsnip#expandable()?'<Plug>(vsnip-expand)':'<C-j>'", { expr = true })
+utils.smap('<C-j>',"vsnip#expandable()?'<Plug>(vsnip-expand)':'<C-j>'", { expr = true })
+
 -- File/buffer search settings: fzf
 cmd [[Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }]]
 cmd [[Plug 'junegunn/fzf.vim']]
