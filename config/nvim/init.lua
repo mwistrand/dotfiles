@@ -69,6 +69,12 @@ opt.visualbell = true
 utils.nnoremap('<C-e>', '3<C-e>')
 utils.nnoremap('<C-y>', '3<C-y>')
 
+-- Navigate through soft line breaks in a way that doesn't break <vcount>
+utils.nnoremap('j', 'v:count == 0 ? "gj" : "j"', {expr = true})
+utils.nnoremap('k', 'v:count == 0 ? "gk" : "k"', {expr = true})
+utils.nnoremap('^', 'v:count == 0 ? "g^" :  "^"', {expr = true})
+utils.nnoremap('$', 'v:count == 0 ? "g$" : "$"', {expr = true})
+
 -- General mappings are triggered with a comma, while mappings that are file
 -- type-specific are triggered with a colon.
 g.mapleader = ','
