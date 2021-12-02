@@ -29,10 +29,10 @@ utils.nmap('gi', '<Plug>(coc-implementation)')
 utils.nmap('gr', '<Plug>(coc-references)')
 
 -- When popup menu is visible, tab goes to next entry; otherwise, ignore
-utils.inoremap('<Tab>', "pumvisible() ? '<c-n>' : '\\<tab>'", { expr = true })
+utils.inoremap('<Tab>', "pumvisible() ? '<c-n>' : '<Tab>'", { expr = true })
 
 -- Shift-Tab for cycling backwards through matches in a completion popup
-utils.inoremap('<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<C-h>"', { expr = true })
+utils.inoremap('<S-Tab>', 'pumvisible() ? "<C-p>" : "<C-h>"', { expr = true })
 
 -- Enter to confirm completion
-utils.inoremap('<CR>', 'pumvisible() ? "\\<C-y>" : "\\<CR>"', { expr = true })
+utils.inoremap('<CR>', 'pumvisible() ? "<C-y>" : "<CR>"', { expr = true })
