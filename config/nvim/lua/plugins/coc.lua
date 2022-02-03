@@ -26,6 +26,7 @@ g.coc_global_extensions = {
 -- use coc.nvim for goto shortcuts
 utils.nmap('gf', '<Plug>(coc-definition)')
 utils.nmap('gi', '<Plug>(coc-implementation)')
+utils.nmap('<C-]>', '<Plug>(coc-implementation)')
 utils.nmap('gr', '<Plug>(coc-references)')
 
 -- When popup menu is visible, tab goes to next entry; otherwise, ignore
