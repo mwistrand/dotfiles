@@ -50,6 +50,9 @@ utils.smap('<C-j>',"vsnip#expandable()?'<Plug>(vsnip-expand)':'<C-j>'", { expr =
 cmd [[Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }]]
 cmd [[Plug 'junegunn/fzf.vim']]
 
+-- Fuzzy finder
+cmd [[Plug 'nvim-telescope/telescope.nvim']]
+
 -- coc.nvim
 cmd [[Plug 'neoclide/coc.nvim', {'branch': 'release', 'for': ['javascript', 'typescript', 'typescript.tsx', 'css', 'java']}]]
 
@@ -111,3 +114,4 @@ require('plugins.fzf')
 require('plugins.gitsigns')
 require('plugins.lualine')
 require('plugins.nvimtree')
+require('plugins.telescope')
