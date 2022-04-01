@@ -39,7 +39,7 @@ vim.g.nvim_tree_icons = {
 vim.g.nvim_tree_group_empty = 1
 
 function NvimTreeConfig.find_toggle()
-  if view.win_open() then
+  if view.is_visible() then
     view.close()
   else
     vim.cmd('NvimTreeToggle')
@@ -56,6 +56,10 @@ nvimtree.setup {
   auto_close = false,
   diagnostics = {
     enable = true
+  },
+  git = {
+    enable = true,
+    ignore = false
   },
   update_focused_file = {
     enable = true,
