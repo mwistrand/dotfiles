@@ -13,6 +13,7 @@ end
 brew "asdf"
 brew "bat"
 brew "clojure/tools/clojure"
+brew "deno"
 brew "diff-so-fancy"
 brew "fd"
 brew "fnm"
