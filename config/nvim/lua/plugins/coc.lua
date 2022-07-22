@@ -2,10 +2,6 @@ local fn = vim.fn
 local g = vim.g
 local utils = require('utils')
 
-local function termcodes(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
-
 -- coc settings
 g.coc_global_extensions = {
   'coc-css',

@@ -5,39 +5,6 @@ local nnoremap = require('utils').nnoremap
 local view = require('nvim-tree.view')
 _G.NvimTreeConfig = {}
 
-vim.g.nvim_tree_icons = {
-  default = '',
-  symlink = '',
-  git = {
-    unstaged = '●',
-    staged = '✓',
-    unmerged = '',
-    renamed = '➜',
-    untracked = '★',
-    deleted = '',
-    ignored = '◌'
-  },
-  folder = {
-    arrow_open = '',
-    arrow_closed = '',
-    default = '',
-    open = '',
-    empty = '',
-    empty_open = '',
-    symlink = '',
-    symlink_open = ''
-  },
-  lsp = {
-    hint = '',
-    info = '',
-    warning = '',
-    error = ''
-  }
-}
-
--- Flatten directories that have only a single folder; useful for JVM projects
-vim.g.nvim_tree_group_empty = 1
-
 function NvimTreeConfig.find_toggle()
   if view.is_visible() then
     view.close()
@@ -50,12 +17,51 @@ nnoremap('<leader>k', '<CMD>lua NvimTreeConfig.find_toggle()<CR>')
 
 view.width = 40
 
-nvimtree.setup {
-  disable_netrw = true,
+nvimtree.setup({
+  disable_netrw = false,
   hijack_netrw = true,
-  auto_close = false,
   diagnostics = {
-    enable = true
+    enable = false,
+    icons = {
+      hint = '',
+      info = '',
+      warning = '',
+      error = ''
+    }
+  },
+  renderer = {
+    add_trailing = false,
+    group_empty = true,
+    highlight_git = true,
+    highlight_opened_files = "all",
+    indent_markers = {
+      enable = true
+    },
+    icons = {
+      glyphs = {
+        default = '',
+        symlink = '',
+        git = {
+          unstaged = '●',
+          staged = '✓',
+          unmerged = '',
+          renamed = '➜',
+          untracked = '★',
+          deleted = '',
+          ignored = '◌'
+        },
+        folder = {
+          arrow_open = '',
+          arrow_closed = '',
+          default = '',
+          open = '',
+          empty = '',
+          empty_open = '',
+          symlink = '',
+          symlink_open = ''
+        }
+      }
+    }
   },
   git = {
     enable = true,
@@ -68,6 +74,11 @@ nvimtree.setup {
   view = {
     width = 40,
     side = 'left',
-    auto_resize = true
+    mappings = {
+      list = {
+        -- unset `<C-e>` to use vim default
+        { key = "<C-e>", action = "" }
+      }
+    }
   }
-}
+})
