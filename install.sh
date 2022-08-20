@@ -78,5 +78,5 @@ fix_terminfo() {
 }
 
 create_symlinks
-fix_terminfo
 install_brew_packages
+fix_terminfo

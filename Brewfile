@@ -4,6 +4,7 @@ if OS.mac?
 
 	# Fonts
 	cask "font-jetbrains-mono"
+	cask "font-3270-nerd-font"
 
 	# Applications
 	cask "kitty"
