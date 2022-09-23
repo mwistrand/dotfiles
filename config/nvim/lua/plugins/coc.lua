@@ -12,6 +12,7 @@ g.coc_global_extensions = {
   'coc-jest',
   'coc-json',
   'coc-pairs',
+  'coc-pyright',
   'coc-prettier',
   'coc-svg',
   'coc-tslint-plugin',
