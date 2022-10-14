@@ -7,100 +7,97 @@ local utils = require('utils')
 local plugLoad = fn['functions#PlugLoad']
 local plugBegin = fn['plug#begin']
 local plugEnd = fn['plug#end']
+local Plug = fn['plug#']
 
 plugLoad()
 
 plugBegin('~/.config/nvim/plugged')
 
 -- Colorschemes
-cmd [[Plug 'dracula/vim']]
-cmd [[Plug 'RRethy/nvim-base16']]
+Plug 'dracula/vim'
+Plug 'RRethy/nvim-base16'
 
 -- Toggle comments with gcc
-cmd [[Plug 'tpope/vim-commentary']]
+Plug 'tpope/vim-commentary'
 
 -- VCS management
-cmd [[Plug 'tpope/vim-fugitive']]
-cmd [[Plug 'nvim-lua/plenary.nvim']]
-cmd [[Plug 'lewis6991/gitsigns.nvim']]
+Plug 'tpope/vim-fugitive'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'lewis6991/gitsigns.nvim'
 
 -- Toggle comments with gcc
-cmd [[Plug 'tpope/vim-commentary']]
+Plug 'tpope/vim-commentary'
 
 -- Indentation detection
-cmd [[Plug 'tpope/vim-sleuth']]
+Plug 'tpope/vim-sleuth'
 
 -- Additional motions for working with the delete register
--- cmd [[Plug 'LandonSchropp/vim-stamp']]
+-- Plug 'LandonSchropp/vim-stamp'
 
 -- Repeat last motion with `.`
-cmd [[Plug 'tpope/vim-repeat']]
+Plug 'tpope/vim-repeat'
 
 -- Use motions to easily change surrounding characters/tags
-cmd [[Plug 'tpope/vim-surround']]
+Plug 'tpope/vim-surround'
 
-cmd [[Plug 'hrsh7th/vim-vsnip']]
-cmd [[Plug 'hrsh7th/vim-vsnip-integ']]
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
+
 local snippets_dir = os.getenv("DOTFILES") .. "/config/nvim/vsnip"
 g.vsnip_snippet_dir = snippets_dir
 utils.imap('<C-j>',"vsnip#expandable()?'<Plug>(vsnip-expand)':'<C-j>'", { expr = true })
 utils.smap('<C-j>',"vsnip#expandable()?'<Plug>(vsnip-expand)':'<C-j>'", { expr = true })
 
 -- File/buffer search settings: fzf
-cmd [[Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }]]
-cmd [[Plug 'junegunn/fzf.vim']]
+Plug('junegunn/fzf', {['dir'] = '~/.fzf', ['do'] = './install --all'})
+Plug 'junegunn/fzf.vim'
 
 -- Fuzzy finder
-cmd [[Plug 'nvim-telescope/telescope.nvim']]
+Plug 'nvim-telescope/telescope.nvim'
 
 -- coc.nvim
-cmd [[Plug 'neoclide/coc.nvim', {'branch': 'release', 'for': ['javascript', 'typescript', 'typescript.tsx', 'css', 'java']}]]
+Plug('neoclide/coc.nvim', {['branch'] = 'release', ['for'] = {'javascript', 'typescript', 'typescript.tsx', 'css', 'java'}})
 
 -- File tree
-cmd [[Plug 'kyazdani42/nvim-web-devicons']]
-cmd [[Plug 'kyazdani42/nvim-tree.lua']]
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'kyazdani42/nvim-tree.lua'
 
 -- Status bar
-cmd [[Plug 'nvim-lualine/lualine.nvim']]
+Plug 'nvim-lualine/lualine.nvim'
 
 -- Language-specific plugins
 -- CSS
-cmd [[Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }]]
-cmd [[Plug 'hail2u/vim-css3-syntax', { 'for': 'css' }]]
-cmd [[Plug 'stephenway/postcss.vim', { 'for': 'css' }]]
-cmd [[Plug 'groenewege/vim-less', { 'for': 'less' }]]
-cmd [[Plug 'wavded/vim-stylus', { 'for': ['stylus', 'markdown'] }]]
+Plug('cakebaker/scss-syntax.vim', {['for'] = 'scss'})
+Plug('hail2u/vim-css3-syntax', {['for'] = 'css'})
+Plug('stephenway/postcss.vim', {['for'] = 'css'})
+Plug('groenewege/vim-less', {['for'] = 'less'})
+Plug('wavded/vim-stylus', {['for'] = {'stylus', 'markdown'}})
 
 -- HTML, Markdown
-cmd [[Plug 'gregsexton/MatchTag', { 'for': 'html' }]]
-cmd [[Plug 'itspriddle/vim-marked', { 'for': 'markdown', 'on': 'MarkedOpen' }]]
-cmd [[Plug 'tpope/vim-markdown', { 'for': 'markdown' }]]
-cmd [[Plug 'othree/html5.vim', { 'for': 'html' }]]
+Plug('gregsexton/MatchTag', {['for'] = 'html'})
+Plug('itspriddle/vim-marked', {['for'] = 'markdown', ['on'] = 'MarkedOpen'})
+Plug('tpope/vim-markdown', {['for'] = 'markdown'})
+Plug('othree/html5.vim', {['for'] = 'html'})
 
 -- JavaScript
-cmd [[Plug 'elzr/vim-json', { 'for': 'json' }]]
-cmd [[Plug 'MaxMEllon/vim-jsx-pretty']]
-cmd [[Plug 'othree/yajs.vim', { 'for': [ 'javascript', 'javascript.jsx', 'html' ] }]]
-cmd [[Plug 'moll/vim-node', { 'for': 'javascript' }]]
+Plug('elzr/vim-json', {['for'] = 'json'})
+Plug('MaxMEllon/vim-jsx-pretty')
+Plug('othree/yajs.vim', {['for'] = {'javascript', 'javascript.jsx', 'html'}})
+Plug('moll/vim-node', {['for'] = 'javascript'})
 
 -- TypeScript
-cmd [[Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'typescript.tsx'] }]]
+Plug('leafgarland/typescript-vim', {['for'] = {'typescript', 'typescript.tsx'}})
 
 -- Clojure
-cmd [[Plug 'guns/vim-sexp', { 'for': 'clojure' }]]
-cmd [[Plug 'liquidz/vim-iced', { 'for': 'clojure' }]]
+Plug('guns/vim-sexp', {['for'] =  'clojure'})
+Plug('liquidz/vim-iced', {['for'] = 'clojure'})
 
 g['iced#buffer#stdout#mods'] = 'rightbelow'
 g['iced#cljs#default_env'] = 'shadow-cljs'
 g['iced#nrepl#auto#does_switch_session'] = 'true'
 
 -- Java
-cmd [[Plug 'vim-test/vim-test', { 'for': 'java' }]]
-
--- Go
-if fn.executable('go') then
-	cmd [[Plug 'fatih/vim-go', { 'for': 'go' }]]
-end
+Plug('vim-test/vim-test', {['for'] = 'java'})
 
 plugEnd()
 
