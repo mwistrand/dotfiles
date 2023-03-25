@@ -1,4 +1,10 @@
 {
+  "package": {
+    "prefix": "package",
+    "body": [
+      "package ${TM_FILENAME/[\\/]/./g}"
+    ]
+  },
   "class": {
     "prefix": "class",
     "body": [

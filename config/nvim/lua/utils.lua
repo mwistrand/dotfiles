@@ -10,12 +10,7 @@ local bufmap = vim.api.nvim_buf_set_keymap
 local function create_map_fn(mode, default_options)
 	return function(key_sequence, command, options)
 		local merged_options = vim.tbl_extend('keep', copy(default_options), copy(options))
-
-		if (merged_options.buffer) then
-			bufmap(mode, key_sequence, command, merged_options)
-		else
-			map(mode, key_sequence, command, merged_options)
-		end
+		vim.keymap.set(mode, key_sequence, command, merged_options)
 	end
 end
 

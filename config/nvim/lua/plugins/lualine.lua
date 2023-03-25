@@ -5,7 +5,7 @@ require('lualine').setup({
   },
   sections = {
 	lualine_a = {'mode'},
-	lualine_b = {'FugitiveHead', {'diagnostics', sources={'nvim_lsp', 'coc'}}},
+	lualine_b = {'FugitiveHead', {'diagnostics', sources={'nvim_lsp',}}},
 	lualine_c = {'filename'},
 	lualine_x = {
 	  'encoding',

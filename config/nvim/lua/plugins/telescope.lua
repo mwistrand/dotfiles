@@ -1,7 +1,7 @@
 local actions = require('telescope.actions')
-local utils = require('utils')
+local nnoremap = require('utils').nnoremap
 
-utils.nnoremap('\\', '<cmd>Telescope live_grep<cr>')
+nnoremap('\\', '<cmd>Telescope live_grep<cr>')
 
 require('telescope').setup({
   defaults = {

@@ -1,11 +1,11 @@
 local api = vim.api
-local utils = require('utils')
+local map = require('utils').map
 
-utils.map('<leader>f', ':Files<CR>')
-utils.map('<leader>g', ':GitFiles<CR>')
-utils.map('<leader>l', ':Lines<CR>')
-utils.map('<leader>r', ':Buffers<CR>')
-utils.map('<leader>s', ':BLines<CR>')
+map('<leader>f', ':Files<CR>')
+map('<leader>g', ':GitFiles<CR>')
+map('<leader>l', ':Lines<CR>')
+map('<leader>r', ':Buffers<CR>')
+map('<leader>s', ':BLines<CR>')
 
 api.nvim_exec(
   [[

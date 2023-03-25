@@ -43,7 +43,7 @@ Plug 'tpope/vim-surround'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
 
-local snippets_dir = os.getenv("DOTFILES") .. "/config/nvim/vsnip"
+local snippets_dir = os.getenv('DOTFILES') .. '/config/nvim/vsnip'
 g.vsnip_snippet_dir = snippets_dir
 utils.imap('<C-j>',"vsnip#expandable()?'<Plug>(vsnip-expand)':'<C-j>'", { expr = true })
 utils.smap('<C-j>',"vsnip#expandable()?'<Plug>(vsnip-expand)':'<C-j>'", { expr = true })
@@ -55,8 +55,15 @@ Plug 'junegunn/fzf.vim'
 -- Fuzzy finder
 Plug 'nvim-telescope/telescope.nvim'
 
--- coc.nvim
-Plug('neoclide/coc.nvim', {['branch'] = 'release', ['for'] = {'javascript', 'typescript', 'typescript.tsx', 'css', 'java'}})
+-- language server
+Plug 'neovim/nvim-lspconfig'
+Plug 'williamboman/nvim-lsp-installer'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
+-- Plug 'hrsh7th/cmp-buffer'
+-- Plug 'hrsh7th/cmp-path'
+-- Plug 'hrsh7th/cmp-cmdline'
 
 -- File tree
 Plug 'kyazdani42/nvim-web-devicons'
@@ -98,6 +105,8 @@ g['iced#nrepl#auto#does_switch_session'] = 'true'
 
 -- Java
 Plug('vim-test/vim-test', {['for'] = 'java'})
+Plug('mfussenegger/nvim-dap')
+Plug('mfussenegger/nvim-jdtls')
 
 plugEnd()
 
@@ -105,10 +114,11 @@ if fn.executable('rg') then
 	opt.grepprg = 'rg --vimgrep'
 end
 
-require('plugins.coc')
 require('plugins.formatter')
 require('plugins.fzf')
 require('plugins.gitsigns')
+require('plugins.lspconfig')
+require('plugins.jdtls')
 require('plugins.lualine')
 require('plugins.nvimtree')
 require('plugins.telescope')

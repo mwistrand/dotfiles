@@ -36,6 +36,10 @@ alias gac="git add . && git commit"
 alias gs="git status"
 alias gb="git branch --show-current"
 
+# Python aliases
+alias python=python3
+alias pip="python -m pip"
+
 # Show doftiles help doc
 alias hdoc="bat ~/.config/help/dotfiles.txt"
 
