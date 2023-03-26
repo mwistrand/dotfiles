@@ -56,14 +56,18 @@ Plug 'junegunn/fzf.vim'
 Plug 'nvim-telescope/telescope.nvim'
 
 -- language server
+Plug 'williamboman/mason.nvim' -- manage language servers
+Plug 'williamboman/mason-lspconfig.nvim' -- automatically install language servers
 Plug 'neovim/nvim-lspconfig'
-Plug 'williamboman/nvim-lsp-installer'
-Plug 'hrsh7th/nvim-cmp'
+
+-- completion
+Plug 'davidsierradz/cmp-conventionalcommits'
+Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
--- Plug 'hrsh7th/cmp-buffer'
--- Plug 'hrsh7th/cmp-path'
--- Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'onsails/lspkind-nvim'
 
 -- File tree
 Plug 'kyazdani42/nvim-web-devicons'
@@ -118,6 +122,7 @@ require('plugins.formatter')
 require('plugins.fzf')
 require('plugins.gitsigns')
 require('plugins.lspconfig')
+require('plugins.cmp')
 require('plugins.jdtls')
 require('plugins.lualine')
 require('plugins.nvimtree')

@@ -1,4 +1,5 @@
 local cmp = require('cmp')
+local lspkind = require('lspkind')
 
 cmp.setup({
 	snippet = {
@@ -19,6 +20,17 @@ cmp.setup({
 		{ name = 'nvim_lsp' },
 		{ name = 'nvim_lsp_signature_help' },
 		{ name = 'vsnip' },
+		{ name = 'conventionalcommits' },
+		{ name = 'buffer' },
+		{ name = 'path' },
 	}),
+	formatting = {
+		format = lspkind.cmp_format({
+			mode = 'symbol_text',
+			maxwidth = 150,
+			ellipsis_char = '...'
+		})
+	},
+	experimental = { native_menu = false, ghost_text = true }
 })
 
