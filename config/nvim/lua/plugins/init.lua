@@ -4,115 +4,130 @@ local g = vim.g
 local opt = vim.opt
 local utils = require('utils')
 
-local plugLoad = fn['functions#PlugLoad']
-local plugBegin = fn['plug#begin']
-local plugEnd = fn['plug#end']
-local Plug = fn['plug#']
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
 
-plugLoad()
+require('lazy').setup({
+	-- Colorschemes
+	'dracula/vim',
+	'RRethy/nvim-base16',
 
-plugBegin('~/.config/nvim/plugged')
+	-- Toggle comments with gcc
+	'tpope/vim-commentary',
 
--- Colorschemes
-Plug 'dracula/vim'
-Plug 'RRethy/nvim-base16'
+	-- VCS management
+	'tpope/vim-fugitive',
+	'nvim-lua/plenary.nvim',
+	'lewis6991/gitsigns.nvim',
 
--- Toggle comments with gcc
-Plug 'tpope/vim-commentary'
+	-- Toggle comments with gcc
+	'tpope/vim-commentary',
 
--- VCS management
-Plug 'tpope/vim-fugitive'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'lewis6991/gitsigns.nvim'
+	-- Indentation detection
+	'tpope/vim-sleuth',
 
--- Toggle comments with gcc
-Plug 'tpope/vim-commentary'
+	-- Repeat last motion with `.`
+	'tpope/vim-repeat',
 
--- Indentation detection
-Plug 'tpope/vim-sleuth'
+	-- Use motions to easily change surrounding characters/tags
+	'tpope/vim-surround',
 
--- Additional motions for working with the delete register
--- Plug 'LandonSchropp/vim-stamp'
+	'hrsh7th/vim-vsnip',
+	{
+		'hrsh7th/vim-vsnip-integ',
+		config = function()
+			local snippets_dir = os.getenv('DOTFILES') .. '/config/nvim/vsnip'
+			g.vsnip_snippet_dir = snippets_dir
+			utils.imap('<C-j>',"vsnip#expandable()?'<Plug>(vsnip-expand)':'<C-j>'", { expr = true })
+			utils.smap('<C-j>',"vsnip#expandable()?'<Plug>(vsnip-expand)':'<C-j>'", { expr = true })
+		end
+	},
 
--- Repeat last motion with `.`
-Plug 'tpope/vim-repeat'
+	-- File/buffer search settings: fzf
+	{ "junegunn/fzf.vim", dependencies = { { dir = vim.env.HOMEBREW_PREFIX .. "/opt/fzf" } } },
 
--- Use motions to easily change surrounding characters/tags
-Plug 'tpope/vim-surround'
 
-Plug 'hrsh7th/vim-vsnip'
-Plug 'hrsh7th/vim-vsnip-integ'
+	-- Fuzzy finder
+	'nvim-telescope/telescope.nvim',
 
-local snippets_dir = os.getenv('DOTFILES') .. '/config/nvim/vsnip'
-g.vsnip_snippet_dir = snippets_dir
-utils.imap('<C-j>',"vsnip#expandable()?'<Plug>(vsnip-expand)':'<C-j>'", { expr = true })
-utils.smap('<C-j>',"vsnip#expandable()?'<Plug>(vsnip-expand)':'<C-j>'", { expr = true })
+	-- language server
+	{ 'neovim/nvim-lspconfig', lazy = false },
+	{
+		'williamboman/mason.nvim', -- manage language servers,
+		dependencies = {
+			'williamboman/mason-lspconfig.nvim', -- automatically install language servers,
+		},
+	},
 
--- File/buffer search settings: fzf
-Plug('junegunn/fzf', {['dir'] = '~/.fzf', ['do'] = './install --all'})
-Plug 'junegunn/fzf.vim'
+	-- completion
+	{
+		'hrsh7th/nvim-cmp',
+		dependencies = {
+			'davidsierradz/cmp-conventionalcommits',
+			'hrsh7th/cmp-buffer',
+			'hrsh7th/cmp-nvim-lsp',
+			'hrsh7th/cmp-nvim-lsp-signature-help',
+			'hrsh7th/cmp-path',
+			'onsails/lspkind-nvim',
+		},
+	},
 
--- Fuzzy finder
-Plug 'nvim-telescope/telescope.nvim'
+	-- File tree
+	'kyazdani42/nvim-web-devicons',
+	'kyazdani42/nvim-tree.lua',
 
--- language server
-Plug 'williamboman/mason.nvim' -- manage language servers
-Plug 'williamboman/mason-lspconfig.nvim' -- automatically install language servers
-Plug 'neovim/nvim-lspconfig'
+	-- Status bar
+	'nvim-lualine/lualine.nvim',
 
--- completion
-Plug 'davidsierradz/cmp-conventionalcommits'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'onsails/lspkind-nvim'
+	-- Language-specific plugins
+	-- CSS
+	{ 'cakebaker/scss-syntax.vim', ft = 'scss' },
+	{ 'hail2u/vim-css3-syntax', ft = 'css' },
+	{ 'stephenway/postcss.vim', ft = 'css' },
+	{ 'groenewege/vim-less', ft = 'less' },
+	{ 'wavded/vim-stylus', ft = { 'stylus', 'markdown' } },
 
--- File tree
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'kyazdani42/nvim-tree.lua'
+	-- HTML, Markdown
+	{ 'gregsexton/MatchTag', ft = 'html' },
+	{ 'tpope/vim-markdown', ft = 'markdown' },
+	{ 'othree/html5.vim', ft = 'html' },
 
--- Status bar
-Plug 'nvim-lualine/lualine.nvim'
+	-- JavaScript
+	{ 'elzr/vim-json', ft = 'json' },
+	'MaxMEllon/vim-jsx-pretty',
+	{ 'othree/yajs.vim', ft = { 'javascript', 'javascript.jsx', 'html' } },
+	{ 'moll/vim-node', ft = 'javascript' },
 
--- Language-specific plugins
--- CSS
-Plug('cakebaker/scss-syntax.vim', {['for'] = 'scss'})
-Plug('hail2u/vim-css3-syntax', {['for'] = 'css'})
-Plug('stephenway/postcss.vim', {['for'] = 'css'})
-Plug('groenewege/vim-less', {['for'] = 'less'})
-Plug('wavded/vim-stylus', {['for'] = {'stylus', 'markdown'}})
+	-- TypeScript
+	{ 'leafgarland/typescript-vim', ft = { 'typescript', 'typescript.tsx' } },
 
--- HTML, Markdown
-Plug('gregsexton/MatchTag', {['for'] = 'html'})
-Plug('itspriddle/vim-marked', {['for'] = 'markdown', ['on'] = 'MarkedOpen'})
-Plug('tpope/vim-markdown', {['for'] = 'markdown'})
-Plug('othree/html5.vim', {['for'] = 'html'})
+	-- Clojure
+	{ 'guns/vim-sexp', ft =  'clojure' },
+	{
+		'liquidz/vim-iced',
+		ft = 'clojure',
+		config = function()
+			g['iced#buffer#stdout#mods'] = 'rightbelow'
+			g['iced#cljs#default_env'] = 'shadow-cljs'
+			g['iced#nrepl#auto#does_switch_session'] = 'true'
+		end
+	},
 
--- JavaScript
-Plug('elzr/vim-json', {['for'] = 'json'})
-Plug('MaxMEllon/vim-jsx-pretty')
-Plug('othree/yajs.vim', {['for'] = {'javascript', 'javascript.jsx', 'html'}})
-Plug('moll/vim-node', {['for'] = 'javascript'})
-
--- TypeScript
-Plug('leafgarland/typescript-vim', {['for'] = {'typescript', 'typescript.tsx'}})
-
--- Clojure
-Plug('guns/vim-sexp', {['for'] =  'clojure'})
-Plug('liquidz/vim-iced', {['for'] = 'clojure'})
-
-g['iced#buffer#stdout#mods'] = 'rightbelow'
-g['iced#cljs#default_env'] = 'shadow-cljs'
-g['iced#nrepl#auto#does_switch_session'] = 'true'
-
--- Java
-Plug('vim-test/vim-test', {['for'] = 'java'})
-Plug('mfussenegger/nvim-dap')
-Plug('mfussenegger/nvim-jdtls')
-
-plugEnd()
+	-- Java
+	{ 'vim-test/vim-test', ft = 'java' },
+	'mfussenegger/nvim-dap',
+	'mfussenegger/nvim-jdtls',
+})
 
 if fn.executable('rg') then
 	opt.grepprg = 'rg --vimgrep'

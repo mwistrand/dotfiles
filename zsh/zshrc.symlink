@@ -29,7 +29,7 @@ export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
 # iced repl
-export PATH=$PATH:$HOME/.vim/plugged/vim-iced/bin
+export PATH=$PATH:$HOME/.local/share/nvim/lazy/vim-iced/bin
 
 # Git aliases
 alias gac="git add . && git commit"
