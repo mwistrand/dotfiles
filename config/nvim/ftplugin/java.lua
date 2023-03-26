@@ -7,9 +7,9 @@ local nmap = require('utils').nmap
 jdtls.start_or_attach(create_config())
 
 -- test commands (requires on vim-test)
-nmap('<LocalLeader>tn', ':TestNearest<cr>')
-nmap('<LocalLeader>tf', ':TestFile<cr>')
-nmap('<LocalLeader>ts', ':TestSuite<cr>')
-nmap('<LocalLeader>tl', ':TestLast<cr>')
-nmap('<LocalLeader>tg', ':TestVisit<cr>')
+-- nmap('<LocalLeader>tn', ':TestNearest<cr>')
+-- nmap('<LocalLeader>tf', ':TestFile<cr>')
+-- nmap('<LocalLeader>ts', ':TestSuite<cr>')
+-- nmap('<LocalLeader>tl', ':TestLast<cr>')
+-- nmap('<LocalLeader>tg', ':TestVisit<cr>')
 -- }}}

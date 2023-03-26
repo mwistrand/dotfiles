@@ -9,7 +9,7 @@ local vnoremap = utils.vnoremap
 
 -- File types that signify a Java project's root directory. This will be
 -- used by eclipse to determine what constitutes a workspace
-local root_markers = {'gradlew', 'mvnw', '.git'}
+local root_markers = { 'gradlew', 'mvnw', '.git' }
 local root_dir = require('jdtls.setup').find_root(root_markers)
 
 -- eclipse.jdt.ls stores project specific data within a folder. If you are working
@@ -23,6 +23,7 @@ local on_attach = function(client, bufnr)
 
 	-- attach the debugger
 	jdtls.setup_dap({ hotcodereplace = 'auto' })
+	jdtls.setup.add_commands()
 
 	local opts = { buffer = bufnr }
 	nnoremap('<LocalLeader>ro', jdtls.organize_imports, opts)
@@ -51,8 +52,16 @@ local on_attach = function(client, bufnr)
 	nnoremap('<LocalLeader>df', '<cmd>Telescope dap frames<cr>', opts)
 	nnoremap('<LocalLeader>dh', '<cmd>Telescope dap commands<cr>', opts)
 
-	-- TODO: debugger for tests?
+	nnoremap('<LocalLeader>tc', jdtls.test_class, opts)
+	nnoremap('<LocalLeader>tn', jdtls.test_nearest_method, opts)
+
 end
+
+local bundles = {
+	-- path to the java debug server
+	home .. '/.local/share/microsoft/java-debug/com.microsoft.java.debug.plugin-0.44.0.jar',
+}
+vim.list_extend(bundles, vim.split(vim.fn.glob(home .. '/.local/share/microsoft/vscode-java-test/*.jar', 1), '\n'))
 
 local jdtls_config = {
 	flags = {
@@ -62,10 +71,7 @@ local jdtls_config = {
 	on_attach = on_attach,
 	root_dir = root_dir,
 	init_options = {
-		bundles = {
-			-- path to the java debug server
-			home .. '.local/share/microsoft/com.microsoft.java.debug.core-0.44.0.jar'
-		}
+		bundles = bundles
 	},
 	-- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request for a list of options
 	settings = {
@@ -75,7 +81,7 @@ local jdtls_config = {
 					-- Use Google Java style guidelines for formatting
 					-- To use, make sure to download the file from https://github.com/google/styleguide/blob/gh-pages/eclipse-java-google-style.xml
 					-- and place it in the ~/.local/share/eclipse directory
-					url = '/.local/share/eclipse/java-google-style.xml',
+					url = home .. '/.local/share/eclipse/java-google-style.xml',
 					profile = 'GoogleStyle',
 				},
 			},

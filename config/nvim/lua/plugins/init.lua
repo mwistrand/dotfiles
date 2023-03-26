@@ -124,7 +124,7 @@ require('lazy').setup({
 	},
 
 	-- Java
-	{ 'vim-test/vim-test', ft = 'java' },
+	-- { 'vim-test/vim-test', ft = 'java' },
 	'mfussenegger/nvim-dap',
 	'mfussenegger/nvim-jdtls',
 })
