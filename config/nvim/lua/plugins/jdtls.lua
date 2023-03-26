@@ -1,8 +1,11 @@
+local lspconfig = require('plugins.lspconfig')
 local home = os.getenv('HOME')
 local jdtls = require('jdtls')
-local nnoremap = require('utils').nnoremap
+local utils = require('utils')
 local vscode = require('dap.ext.vscode')
-local cmp_default_capabilities = require('cmp_nvim_lsp').default_capabilities
+
+local nnoremap = utils.nnoremap
+local vnoremap = utils.vnoremap
 
 -- File types that signify a Java project's root directory. This will be
 -- used by eclipse to determine what constitutes a workspace
@@ -15,46 +18,43 @@ local root_dir = require('jdtls.setup').find_root(root_markers)
 -- current project found using the root_marker as the folder for project specific data.
 local workspace_folder = home .. '/.local/share/eclipse/' .. vim.fn.fnamemodify(root_dir, ':p:h:t')
 
-local on_attach = function(client, buffer)
-	nnoremap('gD', vim.lsp.buf.declaration, { buffer=buffer, desc='Go to declaration'})
-	nnoremap('gd', vim.lsp.buf.definition, { buffer=buffer, desc='Go to definition'})
-	nnoremap('gt', vim.lsp.buf.type_definition, { buffer=buffer, desc='Go to type definition'})
-	nnoremap('gi', vim.lsp.buf.implementation, { buffer=buffer, desc='Go to implementation'})
-
-	nnoremap('K', vim.lsp.buf.hover, { buffer=buffer, desc='Hover text'})
-	nnoremap('<C-k>', vim.lsp.buf.signature_help, { buffer=buffer, desc='Show signature'})
-
-	nnoremap('<LocalLeader>wa', vim.lsp.buf.add_workspace_folder, { buffer=buffer, desc='Add workspace folder'})
-	nnoremap('<LocalLeader>wr', vim.lsp.buf.remove_workspace_folder, { buffer=buffer, desc='Remove workspace folder'})
-	nnoremap('<LocalLeader>wl', function()
-		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-	end, { buffer=buffer, desc='List workspace folders'})
-
-	nnoremap('<LocalLeader>rn', vim.lsp.buf.rename, { buffer=buffer, desc='Rename'})
-	nnoremap('<LocalLeader>rf', function() vim.lsp.buf.format { async = true } end, { buffer=buffer, desc='Format file'})
-	nnoremap('<LocalLeader>ro', jdtls.organize_imports, { buffer=buffer, desc='Organize imports'})
-	nnoremap('<LocalLeader>rev', jdtls.extract_variable, { buffer=buffer, desc='Extract variable'})
-	nnoremap('<LocalLeader>rec', jdtls.extract_constant, { buffer=buffer, desc='Extract constant'})
-	vim.keymap.set('v', '<LocalLeader>rem', [[<ESC><CMD>lua require('jdtls').extract_method(true)<CR>]],
-		{ buffer=buffer, desc = 'Extract method' })
-
-	nnoremap('<LocalLeader>ca', vim.lsp.buf.code_action, { buffer=buffer, desc='Code actions'})
-	vim.keymap.set('v', '<LocalLeader>ca', '<ESC><CMD>lua vim.lsp.buf.range_code_action()<CR>',
-		{ buffer=buffer, desc = 'Code actions' })
+local on_attach = function(client, bufnr)
+	lspconfig.on_attach(client, bufnr)
 
 	-- attach the debugger
 	jdtls.setup_dap({ hotcodereplace = 'auto' })
-	-- load any debugger configuration available in the current project
-	vscode.load_launchjs()
 
-	-- TODO: debugger key bindings
+	local opts = { buffer = bufnr }
+	nnoremap('<LocalLeader>ro', jdtls.organize_imports, opts)
+	nnoremap('<LocalLeader>rev', jdtls.extract_variable, opts)
+	nnoremap('<LocalLeader>rec', jdtls.extract_constant, opts)
+	vnoremap('<LocalLeader>rem', [[<ESC><CMD>lua require('jdtls').extract_method(true)<CR>]], opts)
+
+	nnoremap('<LocalLeader>ca', vim.lsp.buf.code_action, { buffer=buffer, desc='Code actions'})
+	vnoremap('<LocalLeader>ca', '<ESC><CMD>lua vim.lsp.buf.range_code_action()<CR>', opts)
+
+	-- nvim-dap
+	nnoremap('<LocalLeader>bb', [[<cmd>lua require('dap').toggle_breakpoint()<cr>]], opts)
+	nnoremap('<LocalLeader>bc', [[<cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>]], opts)
+	nnoremap('<LocalLeader>bl', [[<cmd>lua require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>]], opts)
+	nnoremap('<LocalLeader>br', [[<cmd>lua require('dap').clear_breakpoints()<cr>]], opts)
+	nnoremap('<LocalLeader>ba', '<cmd>Telescope dap list_breakpoints<cr>', opts)
+
+	nnoremap('<LocalLeader>dc', [[<cmd>lua require('dap').continue()<cr>]], opts)
+	nnoremap('<LocalLeader>dj', [[<cmd>lua require('dap').step_over()<cr>]], opts)
+	nnoremap('<LocalLeader>dk', [[<cmd>lua require('dap').step_into()<cr>]], opts)
+	nnoremap('<LocalLeader>do', [[<cmd>lua require('dap').step_out()<cr>]], opts)
+	nnoremap('<LocalLeader>dd', [[<cmd>lua require('dap').disconnect()<cr>]], opts)
+	nnoremap('<LocalLeader>dt', [[<cmd>lua require('dap').terminate()<cr>]], opts)
+	nnoremap('<LocalLeader>dr', [[<cmd>lua require('dap').repl.toggle()<cr>]], opts)
+	nnoremap('<LocalLeader>dl', [[<cmd>lua require('dap').run_last()<cr>]], opts)
+	nnoremap('<LocalLeader>df', '<cmd>Telescope dap frames<cr>', opts)
+	nnoremap('<LocalLeader>dh', '<cmd>Telescope dap commands<cr>', opts)
+
 	-- TODO: debugger for tests?
 end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = cmp_default_capabilities(capabilities)
-
-config = {
+local jdtls_config = {
 	flags = {
 		debounce_text_changes = 80,
 	},
@@ -163,5 +163,13 @@ config = {
 	},
 }
 
+local config = lspconfig.create_config(function(default_config)
+	return vim.tbl_extend('keep', vim.deepcopy(jdtls_config), vim.deepcopy(default_config))
+end)
+
 -- As this is only needed for Java files, the plugin is started within the relevant ftplugin file
-return config
+local M = {}
+M.create_config = function()
+	return config
+end
+return M
