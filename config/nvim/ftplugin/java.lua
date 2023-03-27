@@ -1,5 +1,5 @@
 local jdtls = require('jdtls')
-local create_config = require('plugins/jdtls').create_config
+local create_config = require('plugins.jdtls').create_config
 local nmap = require('utils').nmap
 
 -- Finally, start jdtls. This will run the language server using the configuration we specified,
