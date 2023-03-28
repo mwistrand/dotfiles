@@ -19,8 +19,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
 	-- Colorschemes
-	'dracula/vim',
-	'RRethy/nvim-base16',
+	'Mofiqul/dracula.nvim',
 
 	-- Toggle comments with gcc
 	'tpope/vim-commentary',
@@ -67,6 +66,13 @@ require('lazy').setup({
 		dependencies = {
 			'williamboman/mason-lspconfig.nvim', -- automatically install language servers,
 		},
+	},
+
+	-- syntax highlighting
+	{
+		"nvim-treesitter/nvim-treesitter",
+		build = ":TSUpdate",
+		dependencies = { "nvim-treesitter/playground", }
 	},
 
 	-- completion
@@ -125,8 +131,14 @@ require('lazy').setup({
 
 	-- Java
 	-- { 'vim-test/vim-test', ft = 'java' },
-	'mfussenegger/nvim-dap',
-	'mfussenegger/nvim-jdtls',
+	{
+		'mfussenegger/nvim-jdtls',
+		dependencies = { 'mfussenegger/nvim-dap', }
+	},
+	{
+		'mfussenegger/nvim-dap',
+		dependencies = { 'rcarriga/nvim-dap-ui' }
+	},
 })
 
 if fn.executable('rg') then
@@ -142,3 +154,6 @@ require('plugins.jdtls')
 require('plugins.lualine')
 require('plugins.nvimtree')
 require('plugins.telescope')
+require('plugins.treesitter')
+
+require('dapui').setup()

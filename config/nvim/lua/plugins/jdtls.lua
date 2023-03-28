@@ -24,6 +24,7 @@ local on_attach = function(client, bufnr)
 	-- attach the debugger
 	jdtls.setup_dap({ hotcodereplace = 'auto' })
 	jdtls.setup.add_commands()
+	-- jdtls.dap.setup_dap_main_class_configs()
 
 	local opts = { buffer = bufnr }
 	nnoremap('<LocalLeader>ro', jdtls.organize_imports, opts)
@@ -41,6 +42,7 @@ local on_attach = function(client, bufnr)
 	nnoremap('<LocalLeader>br', [[<cmd>lua require('dap').clear_breakpoints()<cr>]], opts)
 	nnoremap('<LocalLeader>ba', '<cmd>Telescope dap list_breakpoints<cr>', opts)
 
+	nnoremap('<LocalLeader>dm', '<cmd>JdtRefreshDebugConfigs<cr>', opts) -- setup main classes
 	nnoremap('<LocalLeader>dc', [[<cmd>lua require('dap').continue()<cr>]], opts)
 	nnoremap('<LocalLeader>dj', [[<cmd>lua require('dap').step_over()<cr>]], opts)
 	nnoremap('<LocalLeader>dk', [[<cmd>lua require('dap').step_into()<cr>]], opts)
@@ -49,8 +51,10 @@ local on_attach = function(client, bufnr)
 	nnoremap('<LocalLeader>dt', [[<cmd>lua require('dap').terminate()<cr>]], opts)
 	nnoremap('<LocalLeader>dr', [[<cmd>lua require('dap').repl.toggle()<cr>]], opts)
 	nnoremap('<LocalLeader>dl', [[<cmd>lua require('dap').run_last()<cr>]], opts)
-	nnoremap('<LocalLeader>df', '<cmd>Telescope dap frames<cr>', opts)
-	nnoremap('<LocalLeader>dh', '<cmd>Telescope dap commands<cr>', opts)
+
+	nnoremap('<LocalLeader>uo', [[<cmd>lua require('dapui').open()<cr>]], opts)
+	nnoremap('<LocalLeader>uc', [[<cmd>lua require('dapui').close()<cr>]], opts)
+	nnoremap('<LocalLeader>ut', [[<cmd>lua require('dapui').toggle()<cr>]], opts)
 
 	nnoremap('<LocalLeader>tc', jdtls.test_class, opts)
 	nnoremap('<LocalLeader>tn', jdtls.test_nearest_method, opts)

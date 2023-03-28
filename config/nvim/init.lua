@@ -85,9 +85,4 @@ utils.map('<Leader><Leader>', ':b#<cr>')
 
 require('plugins')
 
-if fn.filereadable(fn.expand('~/.vimrc_background')) then
-    g.base16colorspace = 256
-    cmd [[source ~/.vimrc_background]]
-else
-  cmd('colorscheme dracula')
-end
+cmd('colorscheme dracula')
