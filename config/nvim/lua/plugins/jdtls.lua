@@ -2,7 +2,6 @@ local lspconfig = require('plugins.lspconfig')
 local home = os.getenv('HOME')
 local jdtls = require('jdtls')
 local utils = require('utils')
-local vscode = require('dap.ext.vscode')
 
 local nnoremap = utils.nnoremap
 local vnoremap = utils.vnoremap
@@ -18,13 +17,26 @@ local root_dir = require('jdtls.setup').find_root(root_markers)
 -- current project found using the root_marker as the folder for project specific data.
 local workspace_folder = home .. '/.local/share/eclipse/' .. vim.fn.fnamemodify(root_dir, ':p:h:t')
 
+function create_connect_debugger_cmd()
+	local is_connected = false
+	require('jdtls.dap').setup_dap_main_class_configs({
+		verbose = true,
+		on_ready = function()
+			if is_connected == true then
+				print("Already connected")
+			else
+				require('dap').continue()
+			end
+		end
+	})
+end
+
 local on_attach = function(client, bufnr)
 	lspconfig.on_attach(client, bufnr)
 
 	-- attach the debugger
 	jdtls.setup_dap({ hotcodereplace = 'auto' })
 	jdtls.setup.add_commands()
-	-- jdtls.dap.setup_dap_main_class_configs()
 
 	local opts = { buffer = bufnr }
 	nnoremap('<LocalLeader>ro', jdtls.organize_imports, opts)
@@ -32,29 +44,7 @@ local on_attach = function(client, bufnr)
 	nnoremap('<LocalLeader>rec', jdtls.extract_constant, opts)
 	vnoremap('<LocalLeader>rem', [[<ESC><CMD>lua require('jdtls').extract_method(true)<CR>]], opts)
 
-	nnoremap('<LocalLeader>ca', vim.lsp.buf.code_action, { buffer=buffer, desc='Code actions'})
-	vnoremap('<LocalLeader>ca', '<ESC><CMD>lua vim.lsp.buf.range_code_action()<CR>', opts)
-
-	-- nvim-dap
-	nnoremap('<LocalLeader>bb', [[<cmd>lua require('dap').toggle_breakpoint()<cr>]], opts)
-	nnoremap('<LocalLeader>bc', [[<cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>]], opts)
-	nnoremap('<LocalLeader>bl', [[<cmd>lua require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>]], opts)
-	nnoremap('<LocalLeader>br', [[<cmd>lua require('dap').clear_breakpoints()<cr>]], opts)
-	nnoremap('<LocalLeader>ba', '<cmd>Telescope dap list_breakpoints<cr>', opts)
-
-	nnoremap('<LocalLeader>dm', '<cmd>JdtRefreshDebugConfigs<cr>', opts) -- setup main classes
-	nnoremap('<LocalLeader>dc', [[<cmd>lua require('dap').continue()<cr>]], opts)
-	nnoremap('<LocalLeader>dj', [[<cmd>lua require('dap').step_over()<cr>]], opts)
-	nnoremap('<LocalLeader>dk', [[<cmd>lua require('dap').step_into()<cr>]], opts)
-	nnoremap('<LocalLeader>do', [[<cmd>lua require('dap').step_out()<cr>]], opts)
-	nnoremap('<LocalLeader>dd', [[<cmd>lua require('dap').disconnect()<cr>]], opts)
-	nnoremap('<LocalLeader>dt', [[<cmd>lua require('dap').terminate()<cr>]], opts)
-	nnoremap('<LocalLeader>dr', [[<cmd>lua require('dap').repl.toggle()<cr>]], opts)
-	nnoremap('<LocalLeader>dl', [[<cmd>lua require('dap').run_last()<cr>]], opts)
-
-	nnoremap('<LocalLeader>uo', [[<cmd>lua require('dapui').open()<cr>]], opts)
-	nnoremap('<LocalLeader>uc', [[<cmd>lua require('dapui').close()<cr>]], opts)
-	nnoremap('<LocalLeader>ut', [[<cmd>lua require('dapui').toggle()<cr>]], opts)
+	nnoremap('<LocalLeader>c', create_connect_debugger_cmd, opts)
 
 	nnoremap('<LocalLeader>tc', jdtls.test_class, opts)
 	nnoremap('<LocalLeader>tn', jdtls.test_nearest_method, opts)

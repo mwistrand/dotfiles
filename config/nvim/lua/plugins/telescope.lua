@@ -1,9 +1,10 @@
 local actions = require('telescope.actions')
 local nnoremap = require('utils').nnoremap
+local telescope = require('telescope')
 
 nnoremap('\\', '<cmd>Telescope live_grep<cr>')
 
-require('telescope').setup({
+telescope.setup({
   defaults = {
 	mappings = {
 	  i = {
@@ -16,3 +17,5 @@ require('telescope').setup({
 	}
   }
 })
+
+telescope.load_extension('dap')

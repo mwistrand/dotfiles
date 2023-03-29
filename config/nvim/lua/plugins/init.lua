@@ -57,7 +57,10 @@ require('lazy').setup({
 
 
 	-- Fuzzy finder
-	'nvim-telescope/telescope.nvim',
+	{
+		'nvim-telescope/telescope.nvim',
+		dependencies = { 'nvim-telescope/telescope-dap.nvim', }
+	},
 
 	-- language server
 	{ 'neovim/nvim-lspconfig', lazy = false },
@@ -66,6 +69,12 @@ require('lazy').setup({
 		dependencies = {
 			'williamboman/mason-lspconfig.nvim', -- automatically install language servers,
 		},
+	},
+	{
+		'j-hui/fidget.nvim', -- display LSP progress
+		config = function()
+			require('fidget').setup({})
+		end
 	},
 
 	-- syntax highlighting
@@ -131,14 +140,8 @@ require('lazy').setup({
 
 	-- Java
 	-- { 'vim-test/vim-test', ft = 'java' },
-	{
-		'mfussenegger/nvim-jdtls',
-		dependencies = { 'mfussenegger/nvim-dap', }
-	},
-	{
-		'mfussenegger/nvim-dap',
-		dependencies = { 'rcarriga/nvim-dap-ui' }
-	},
+	'mfussenegger/nvim-jdtls',
+	'mfussenegger/nvim-dap',
 })
 
 if fn.executable('rg') then
@@ -150,10 +153,9 @@ require('plugins.fzf')
 require('plugins.gitsigns')
 require('plugins.lspconfig')
 require('plugins.cmp')
+require('plugins.dap')
 require('plugins.jdtls')
 require('plugins.lualine')
 require('plugins.nvimtree')
 require('plugins.telescope')
 require('plugins.treesitter')
-
-require('dapui').setup()

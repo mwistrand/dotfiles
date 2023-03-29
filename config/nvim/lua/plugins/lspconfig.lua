@@ -1,8 +1,11 @@
 local lspconfig = require('lspconfig')
 local mason = require('mason')
 local mason_lspconfig = require('mason-lspconfig')
-local nnoremap = require('utils').nnoremap
+local utils = require('utils')
 local vscode = require('dap.ext.vscode')
+
+local nnoremap = utils.nnoremap
+local vnoremap = utils.vnoremap
 
 mason.setup({
     ui = {
@@ -31,7 +34,7 @@ local on_attach = function(client, bufnr)
     nnoremap('<C-k>', vim.lsp.buf.signature_help, opts)
 
     nnoremap('ga', vim.lsp.buf.code_action, opts)
-    nnoremap('gA', vim.lsp.buf.range_code_action, opts)
+    vnoremap('ga', vim.lsp.buf.code_action, opts)
 
     nnoremap('<LocalLeader>rn', vim.lsp.buf.rename, opts)
     nnoremap('<LocalLeader>rf', function()
