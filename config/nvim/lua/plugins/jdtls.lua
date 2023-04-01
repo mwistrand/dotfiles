@@ -17,16 +17,13 @@ local root_dir = require('jdtls.setup').find_root(root_markers)
 -- current project found using the root_marker as the folder for project specific data.
 local workspace_folder = home .. '/.local/share/eclipse/' .. vim.fn.fnamemodify(root_dir, ':p:h:t')
 
+-- Every time this is called, it either starts the debugger and executes the main code path,
+-- or displays a window of options if a session has already started.
 function create_connect_debugger_cmd()
-	local is_connected = false
 	require('jdtls.dap').setup_dap_main_class_configs({
 		verbose = true,
 		on_ready = function()
-			if is_connected == true then
-				print("Already connected")
-			else
-				require('dap').continue()
-			end
+			require('dap').continue()
 		end
 	})
 end
