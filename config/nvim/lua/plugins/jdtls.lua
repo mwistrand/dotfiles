@@ -1,6 +1,8 @@
+local dap = require('dap')
 local lspconfig = require('plugins.lspconfig')
 local home = os.getenv('HOME')
 local jdtls = require('jdtls')
+local ui = require('plugins.dap-ui')
 local utils = require('utils')
 
 local nnoremap = utils.nnoremap
@@ -19,13 +21,23 @@ local workspace_folder = home .. '/.local/share/eclipse/' .. vim.fn.fnamemodify(
 
 -- Every time this is called, it either starts the debugger and executes the main code path,
 -- or displays a window of options if a session has already started.
-function create_connect_debugger_cmd()
-	require('jdtls.dap').setup_dap_main_class_configs({
-		verbose = true,
-		on_ready = function()
-			require('dap').continue()
-		end
-	})
+function create_connect_debugger_cmd(is_debug)
+	return function()
+		require('jdtls.dap').setup_dap_main_class_configs({
+			verbose = true,
+			on_ready = function()
+				dap.continue()
+
+				dap.listeners.after.event_initialized['dotfiles'] = function()
+					if is_debug == true then
+						ui.open_footer()
+					else
+						ui.toggle_dap_terminal()
+					end
+				end
+			end
+		})
+	end
 end
 
 local on_attach = function(client, bufnr)
@@ -41,7 +53,8 @@ local on_attach = function(client, bufnr)
 	nnoremap('<LocalLeader>rec', jdtls.extract_constant, opts)
 	vnoremap('<LocalLeader>rem', [[<ESC><CMD>lua require('jdtls').extract_method(true)<CR>]], opts)
 
-	nnoremap('<LocalLeader>c', create_connect_debugger_cmd, opts)
+	nnoremap('<LocalLeader>c', create_connect_debugger_cmd(true), opts)
+	nnoremap('<LocalLeader>s', create_connect_debugger_cmd(false), opts)
 
 	nnoremap('<LocalLeader>tc', jdtls.test_class, opts)
 	nnoremap('<LocalLeader>tn', jdtls.test_nearest_method, opts)
