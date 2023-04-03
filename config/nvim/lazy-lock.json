@@ -26,6 +26,7 @@
   "plenary.nvim": { "branch": "master", "commit": "253d34830709d690f013daf2853a9d21ad7accab" },
   "postcss.vim": { "branch": "master", "commit": "8d70d86ef027f468dda98890a180667359db52f2" },
   "scss-syntax.vim": { "branch": "master", "commit": "bda22a93d1dcfcb8ee13be1988560d9bb5bd0fef" },
+  "tabular": { "branch": "master", "commit": "339091ac4dd1f17e225fe7d57b48aff55f99b23a" },
   "telescope-dap.nvim": { "branch": "master", "commit": "313d2ea12ae59a1ca51b62bf01fc941a983d9c9c" },
   "telescope.nvim": { "branch": "master", "commit": "942fe5faef47b21241e970551eba407bc10d9547" },
   "typescript-vim": { "branch": "master", "commit": "52f3ca3474d51f5021696ffb7297d989e49121ac" },

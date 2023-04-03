@@ -112,10 +112,12 @@ require('lazy').setup({
 	{ 'groenewege/vim-less', ft = 'less' },
 	{ 'wavded/vim-stylus', ft = { 'stylus', 'markdown' } },
 
-	-- HTML, Markdown
+	-- HTML
 	{ 'gregsexton/MatchTag', ft = 'html' },
-	{ 'tpope/vim-markdown', ft = 'markdown' },
 	{ 'othree/html5.vim', ft = 'html' },
+
+	-- Markdown
+	{ 'preservim/vim-markdown', ft = 'markdown', dependencies = { 'godlygeek/tabular' } },
 
 	-- JavaScript
 	{ 'elzr/vim-json', ft = 'json' },
