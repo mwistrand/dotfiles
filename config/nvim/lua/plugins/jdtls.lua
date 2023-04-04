@@ -32,7 +32,7 @@ function create_connect_debugger_cmd(is_debug)
 					if is_debug == true then
 						ui.open_footer()
 					else
-						ui.toggle_dap_terminal()
+						ui.show_footer_group('terminal')
 					end
 				end
 			end

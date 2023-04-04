@@ -7,11 +7,23 @@ local footer_config_defaults = {
 	height = 0.3,
 	groups = {
 		{
-			name = 'frames_and_scopes',
+			name = 'frames_scopes',
 			widgets = {
 				{ name = 'frames', width = 0.3 },
 				{ name = 'scopes', width = 0.7 },
 			}
+		},
+		{
+			name = 'frames_threads_expressions',
+			widgets = {
+				{ name = 'frames', width = 0.3 },
+				{ name = 'threads', width = 0.4 },
+				{ name = 'expression', width = 0.3 },
+			}
+		},
+		{
+			name = 'terminal',
+			widgets = { { name = 'terminal', width = 1 } }
 		},
 	},
 }
@@ -22,7 +34,6 @@ local footer_state = {
 	is_open = false,
 	active_group = nil,
 
-	console = nil,
 	frames = nil,
 	scopes = nil,
 }
@@ -52,7 +63,7 @@ dap.defaults.fallback.terminal_win_cmd = function()
 end
 
 local terminal_win = nil
-local close_terminal_win = function()
+local close_terminal = function()
 	if terminal_win ~= nil then
 		pcall(function()
 			vim.api.nvim_win_close(terminal_win, true)
@@ -60,31 +71,6 @@ local close_terminal_win = function()
 		terminal_win = nil
 	end
 end
-
-function M.toggle_dap_terminal()
-	if terminal_bufnr == nil then
-		return
-	end
-
-	if terminal_win == nil then
-		current_window_height = vim.api.nvim_win_get_height(0)
-		current_window_width = vim.api.nvim_win_get_width(0)
-		terminal_win = vim.api.nvim_open_win(terminal_bufnr, 0, {
-			relative = 'win',
-			row = math.floor(current_window_height * 0.05),
-			col = math.floor(current_window_width * 0.05),
-			height = math.floor(current_window_height * 0.9),
-			width = math.floor(current_window_width * 0.9),
-			style = 'minimal',
-			border = 'single',
-		})
-
-		set_close_keybindings(close_terminal_win, terminal_bufnr)
-	else
-		close_terminal_win()
-	end
-end
--- end toggle dap console
 
 M.get_widget_callback = (function()
 	local view = nil
@@ -124,9 +110,27 @@ local function new_widget_view(widget, height, width, index)
 		.build()
 end
 
+local function open_terminal()
+	if terminal_bufnr == nil then
+		return
+	end
+
+	if terminal_win == nil then
+		current_window_height = vim.api.nvim_win_get_height(0)
+		current_window_width = vim.api.nvim_win_get_width(0)
+		vim.cmd('belowright split')
+		terminal_win = vim.api.nvim_get_current_win()
+		vim.api.nvim_win_set_option(terminal_win, 'number', false)
+		vim.api.nvim_win_set_option(terminal_win, 'relativenumber', false)
+		vim.api.nvim_win_set_option(terminal_win, 'statusline', ' ')
+		vim.api.nvim_win_set_height(terminal_win, math.floor(current_window_height * 0.3))
+		vim.api.nvim_win_set_buf(terminal_win, terminal_bufnr)
+	end
+end
+
 function M.open_footer()
 	local config = footer_state.config
-	local active_group = config.active_group or config.groups[1]
+	local active_group = footer_state.active_group or config.active_group or config.groups[1]
 
 	local current_window = vim.api.nvim_get_current_win()
 	local current_window_height = vim.api.nvim_win_get_height(0)
@@ -135,11 +139,15 @@ function M.open_footer()
 
 	for i, widget_config in ipairs(active_group.widgets) do
 		local name = widget_config.name
-		if footer_state[name] == nil then
-			local width = math.floor(current_window_width * widget_config.width)
-			footer_state[name] = new_widget_view(widgets[name], footer_height, width, i)
+		if name == 'terminal' then
+			open_terminal()
+		else
+			if footer_state[name] == nil then
+				local width = math.floor(current_window_width * widget_config.width)
+				footer_state[name] = new_widget_view(widgets[name], footer_height, width, i)
+			end
+			footer_state[name].open()
 		end
-		footer_state[name].open()
 	end
 
 	footer_state.active_group = active_group
@@ -150,10 +158,14 @@ end
 function M.close_footer()
 	local active_group = footer_state.active_group
 
-	for i, widget_config in ipairs(active_group.widgets) do
-		local name = widget_config.name
-		if footer_state[name] ~= nil then
-			footer_state[name].close()
+	if active_group ~= nil then
+		for i, widget_config in ipairs(active_group.widgets) do
+			local name = widget_config.name
+			if name == 'terminal' then
+				close_terminal()
+			elseif footer_state[name] ~= nil then
+				footer_state[name].close()
+			end
 		end
 	end
 
@@ -168,12 +180,41 @@ function M.toggle_footer()
 	end
 end
 
-function M.show_group(group)
+function M.next_footer_group()
+	local active_group = footer_state.active_group
+	local groups = footer_state.config.groups
+	if active_group == nil or groups == nil then
+		return
+	end
+
+	for index, group in pairs(groups) do
+		if group.name == active_group.name then
+			local next_group = groups[index + 1] or groups[1]
+			M.show_footer_group(next_group.name)
+			return
+		end
+	end
 end
 
-function M.get_show_group_command(group)
+function M.show_footer_group(group_name)
+	local groups = footer_state.config.groups
+	if groups == nil then
+		return
+	end
+
+	for _, group in pairs(groups) do
+		if group.name == group_name then
+			M.close_footer()
+			footer_state.active_group = group
+			M.open_footer()
+			return
+		end
+	end
+end
+
+function M.get_show_footer_group_command(group)
 	return function()
-		M.show_group(group)
+		M.show_footer_group(group)
 	end
 end
 
