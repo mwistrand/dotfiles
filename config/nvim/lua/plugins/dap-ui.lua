@@ -3,6 +3,38 @@ local widgets = require('dap.ui.widgets')
 
 local M = {}
 
+local footer_config_defaults = {
+	height = 0.3,
+	groups = {
+		{
+			name = 'frames_and_scopes',
+			widgets = {
+				{ name = 'frames', width = 0.3 },
+				{ name = 'scopes', width = 0.7 },
+			}
+		},
+	},
+}
+
+local footer_state = {
+	config = footer_config_defaults,
+
+	is_open = false,
+	active_group = nil,
+
+	console = nil,
+	frames = nil,
+	scopes = nil,
+}
+
+function M.setup(config)
+	-- TODO validate config
+	footer_state.config = {
+		height = config.height or footer_config_defaults.height,
+		groups = config.groups or footer_config_defaults.groups,
+	}
+end
+
 local function set_close_keybindings(close_handler, bufnr)
 	local opts = {}
 	if bufnr ~= nil then
@@ -71,14 +103,8 @@ M.get_widget_callback = (function()
 	end
 end)()
 
-local footer_state = {
-	is_open = false,
-	frames = nil,
-	scopes = nil,
-}
-
 local function new_widget_view(widget, height, width, index)
-	local position_cmd = index == 0 and 'split' or 'vsplit'
+	local position_cmd = index == 1 and 'split' or 'vsplit'
 	return widgets.builder(widget)
 		.new_win(function()
 			vim.cmd('belowright ' .. position_cmd)
@@ -87,7 +113,7 @@ local function new_widget_view(widget, height, width, index)
 			vim.api.nvim_win_set_option(win, 'relativenumber', false)
 			vim.api.nvim_win_set_option(win, 'statusline', ' ')
 
-			if index == 0 then
+			if index == 1 then
 				vim.api.nvim_win_set_height(win, height)
 			else
 				vim.api.nvim_win_set_width(win, width)
@@ -99,36 +125,36 @@ local function new_widget_view(widget, height, width, index)
 end
 
 function M.open_footer()
+	local config = footer_state.config
+	local active_group = config.active_group or config.groups[1]
+
 	local current_window = vim.api.nvim_get_current_win()
 	local current_window_height = vim.api.nvim_win_get_height(0)
 	local current_window_width = vim.api.nvim_win_get_width(0)
-	local footer_height = math.floor(current_window_height * 0.3)
-	local frames_width = math.floor(current_window_width * 0.3)
-	local scopes_width = math.floor(current_window_width * 0.7)
+	local footer_height = math.floor(current_window_height * config.height)
 
-	if footer_state.frames == nil then
-		footer_state.frames = new_widget_view(widgets.frames, footer_height, frames_width, 0)
+	for i, widget_config in ipairs(active_group.widgets) do
+		local name = widget_config.name
+		if footer_state[name] == nil then
+			local width = math.floor(current_window_width * widget_config.width)
+			footer_state[name] = new_widget_view(widgets[name], footer_height, width, i)
+		end
+		footer_state[name].open()
 	end
 
-	if footer_state.scopes == nil then
-		footer_state.scopes = new_widget_view(widgets.scopes, footer_height, scopes_width, 1)
-	end
-
-	footer_state.frames.open()
-	footer_state.scopes.open()
+	footer_state.active_group = active_group
 	footer_state.is_open = true
 	vim.api.nvim_set_current_win(current_window)
 end
 
 function M.close_footer()
-	local frames = footer_state.frames
-	local scopes = footer_state.scopes
+	local active_group = footer_state.active_group
 
-	if frames ~= nil then
-		frames.close()
-	end
-	if scopes ~= nil then
-		scopes.close()
+	for i, widget_config in ipairs(active_group.widgets) do
+		local name = widget_config.name
+		if footer_state[name] ~= nil then
+			footer_state[name].close()
+		end
 	end
 
 	footer_state.is_open = false
@@ -139,6 +165,15 @@ function M.toggle_footer()
 		M.close_footer()
 	else
 		M.open_footer()
+	end
+end
+
+function M.show_group(group)
+end
+
+function M.get_show_group_command(group)
+	return function()
+		M.show_group(group)
 	end
 end
 

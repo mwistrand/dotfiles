@@ -2,6 +2,8 @@ local nnoremap = require('utils').nnoremap
 local ui = require('plugins.dap-ui')
 local widgets = require('dap.ui.widgets')
 
+ui.setup({})
+
 local dap_breakpoint = {
 	breakpoint = {
 		text = '🔴',
