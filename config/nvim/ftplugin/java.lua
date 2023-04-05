@@ -2,8 +2,6 @@ local jdtls = require('jdtls')
 local create_config = require('plugins.jdtls').create_config
 local nmap = require('utils').nmap
 
-vim.cmd('colorscheme dracula')
-
 -- Finally, start jdtls. This will run the language server using the configuration we specified,
 -- setup the keymappings, and attach the LSP client to the current buffer
 jdtls.start_or_attach(create_config())

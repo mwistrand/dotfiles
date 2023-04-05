@@ -20,6 +20,7 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
 	-- Colorschemes
 	'Mofiqul/dracula.nvim',
+	'folke/tokyonight.nvim',
 
 	-- Toggle comments with gcc
 	'tpope/vim-commentary',
