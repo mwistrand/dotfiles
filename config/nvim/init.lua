@@ -85,4 +85,4 @@ utils.map('<Leader><Leader>', ':b#<cr>')
 
 require('plugins')
 
-cmd('colorscheme tokyonight-storm')
+cmd('colorscheme tokyonight-moon')
