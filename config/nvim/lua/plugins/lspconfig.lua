@@ -18,7 +18,9 @@ mason.setup({
 })
 
 mason_lspconfig.setup({
-    ensure_installed = { 'angularls', 'jdtls', 'lua_ls', 'tsserver' }
+    ensure_installed = { 'angularls', 'gopls', 'jdtls', 'lua_ls', 'tsserver' },
+    automatic_installation = true,
+    ui = { check_outdated_servers_on_open = true },
 })
 
 local on_attach = function(client, bufnr)
@@ -59,7 +61,25 @@ local create_config = function(factory)
     return factory({ capabilities = capabilities, on_attach = on_attach })
 end
 
-lspconfig.tsserver.setup(create_config())
+lspconfig.tsserver.setup(create_config(function(config)
+    config.root_dir = lspconfig.util.root_pattern('tsconfig.json')
+    return config
+end))
+
+lspconfig.gopls.setup(create_config(function(config)
+    config.cmd = {'gopls'}
+    config.filetypes = {'go', 'gomod', 'gowork', 'gotmpl'}
+    config.root_dir = lspconfig.util.root_pattern('go.mod', '.git')
+    config.settings = {
+        gopls = {
+            analyses = {
+                unusedparams = true,
+            },
+            staticcheck = true,
+        },
+    }
+    return config
+end))
 
 -- load any debugger configuration available in the current project
 vscode.load_launchjs()
