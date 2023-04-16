@@ -158,7 +158,16 @@ require('lazy').setup({
 			{'<leader>xq', '<cmd>TroubleToggle quickfix<cr>'},
 			{'<leader>xl', '<cmd>TroubleToggle loclist<cr>'},
 		}
-	}
+	},
+
+	-- Writing
+	{
+		'junegunn/goyo.vim',
+		ft = 'markdown',
+		keys = {
+			{'<LocalLeader>w', '<cmd>Goyo<cr>'}
+		}
+	},
 })
 
 if fn.executable('rg') then
