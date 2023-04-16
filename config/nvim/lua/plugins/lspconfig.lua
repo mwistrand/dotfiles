@@ -1,6 +1,7 @@
 local lspconfig = require('lspconfig')
 local mason = require('mason')
 local mason_lspconfig = require('mason-lspconfig')
+local null_ls = require('null-ls')
 local utils = require('utils')
 local vscode = require('dap.ext.vscode')
 
@@ -21,6 +22,10 @@ mason_lspconfig.setup({
     ensure_installed = { 'angularls', 'gopls', 'jdtls', 'lua_ls', 'tsserver' },
     automatic_installation = true,
     ui = { check_outdated_servers_on_open = true },
+})
+
+null_ls.setup({
+    sources = { null_ls.builtins.diagnostics.vale, },
 })
 
 local on_attach = function(client, bufnr)

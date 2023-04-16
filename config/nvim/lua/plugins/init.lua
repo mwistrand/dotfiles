@@ -69,6 +69,7 @@ require('lazy').setup({
 		'williamboman/mason.nvim', -- manage language servers,
 		dependencies = {
 			'williamboman/mason-lspconfig.nvim', -- automatically install language servers,
+			'jose-elias-alvarez/null-ls.nvim',
 		},
 	},
 	{
@@ -99,8 +100,8 @@ require('lazy').setup({
 	},
 
 	-- File tree
-	'kyazdani42/nvim-web-devicons',
-	'kyazdani42/nvim-tree.lua',
+	'nvim-tree/nvim-web-devicons',
+	'nvim-tree/nvim-tree.lua',
 
 	-- Status bar
 	'nvim-lualine/lualine.nvim',
@@ -145,6 +146,19 @@ require('lazy').setup({
 	-- { 'vim-test/vim-test', ft = 'java' },
 	'mfussenegger/nvim-jdtls',
 	'mfussenegger/nvim-dap',
+
+	-- Diagnostics
+	{
+		'folke/trouble.nvim',
+		config = true,
+		keys = {
+			{'<leader>xx', '<cmd>TroubleToggle<cr>'},
+			{'<leader>xw', '<cmd>TroubleToggle workspace_diagnostics<cr>'},
+			{'<leader>xd', '<cmd>TroubleToggle document_diagnostics<cr>'},
+			{'<leader>xq', '<cmd>TroubleToggle quickfix<cr>'},
+			{'<leader>xl', '<cmd>TroubleToggle loclist<cr>'},
+		}
+	}
 })
 
 if fn.executable('rg') then
