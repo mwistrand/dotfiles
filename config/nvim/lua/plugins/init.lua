@@ -119,7 +119,7 @@ require('lazy').setup({
 	{ 'othree/html5.vim', ft = 'html' },
 
 	-- Markdown
-	{ 'preservim/vim-markdown', ft = 'markdown', dependencies = { 'godlygeek/tabular' } },
+	{ 'ellisonleao/glow.nvim', cmd = 'Glow', config = true, ft = 'markdown' },
 
 	-- JavaScript
 	{ 'elzr/vim-json', ft = 'json' },
@@ -165,7 +165,7 @@ require('lazy').setup({
 		'junegunn/goyo.vim',
 		ft = 'markdown',
 		keys = {
-			{'<LocalLeader>w', '<cmd>Goyo<cr>'}
+			{'<LocalLeader>v', '<cmd>Goyo<cr>'}
 		}
 	},
 })
