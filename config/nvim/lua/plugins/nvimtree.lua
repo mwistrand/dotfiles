@@ -17,7 +17,13 @@ nnoremap('<leader>k', '<CMD>lua NvimTreeConfig.find_toggle()<CR>')
 
 view.width = 40
 
+local function on_attach(bufnr)
+  local api = require('nvim-tree.api')
+  api.config.mappings.default_on_attach(bufnr)
+end
+
 nvimtree.setup({
+  on_attach = on_attach,
   disable_netrw = false,
   hijack_netrw = true,
   diagnostics = {

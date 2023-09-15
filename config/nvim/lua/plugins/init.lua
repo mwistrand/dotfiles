@@ -147,6 +147,9 @@ require('lazy').setup({
 	'mfussenegger/nvim-jdtls',
 	'mfussenegger/nvim-dap',
 
+	-- Rust
+	'simrat39/rust-tools.nvim',
+
 	-- Diagnostics
 	{
 		'folke/trouble.nvim',
@@ -183,5 +186,6 @@ require('plugins.dap')
 require('plugins.jdtls')
 require('plugins.lualine')
 require('plugins.nvimtree')
+require('plugins.rust-tools')
 require('plugins.telescope')
 require('plugins.treesitter')

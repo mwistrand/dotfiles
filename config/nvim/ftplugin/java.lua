@@ -4,6 +4,7 @@ local nmap = require('utils').nmap
 
 -- Finally, start jdtls. This will run the language server using the configuration we specified,
 -- setup the keymappings, and attach the LSP client to the current buffer
+print("starting")
 jdtls.start_or_attach(create_config())
 
 -- test commands (requires on vim-test)

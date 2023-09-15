@@ -45,6 +45,12 @@ create_symlinks() {
 	symlink_files_in_dir "clojure"
 }
 
+create_language_files() {
+	echo -e "Creating language files for ltex..."
+	mkdir -p "$HOME/.config/spell"
+	touch "$HOME/.config/spell/en.utf-8.add"
+}
+
 install_brew_packages() {
 	if [ "$(uname)" == "Darwin" ]; then
 		echo -e "Install homebrew packages?"
@@ -78,5 +84,6 @@ fix_terminfo() {
 }
 
 create_symlinks
+create_language_files
 install_brew_packages
 fix_terminfo
