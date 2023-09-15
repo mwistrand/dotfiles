@@ -1,6 +1,9 @@
 [init]
     defaultBranch = main
 
+[include]
+	path = ~/.gitconfig-local
+
 [color]
 	ui = true
 
@@ -28,9 +31,3 @@
 
 [push]
 	default = current # push current branch only
-
-[user]
-	email = matt.wistrand@gmail.com
-	name = Matt Wistrand
-[github]
-	token = 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
