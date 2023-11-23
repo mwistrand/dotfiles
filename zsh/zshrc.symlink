@@ -31,7 +31,7 @@ alias gs="git status"
 alias gb="git branch --show-current"
 
 # Python aliases
-alias python=python3
+alias python=python3.12
 alias pip="python -m pip"
 
 # Show doftiles help doc
