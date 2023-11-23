@@ -20,6 +20,7 @@ view.width = 40
 local function on_attach(bufnr)
   local api = require('nvim-tree.api')
   api.config.mappings.default_on_attach(bufnr)
+  vim.keymap.del('n', '<C-e>', { buffer = bufnr })
 end
 
 nvimtree.setup({
@@ -80,11 +81,5 @@ nvimtree.setup({
   view = {
     width = 40,
     side = 'left',
-    mappings = {
-      list = {
-        -- unset `<C-e>` to use vim default
-        { key = "<C-e>", action = "" }
-      }
-    }
   }
 })
