@@ -43,3 +43,6 @@ brew "zsh"
 
 tap "spring-io/tap"
 brew "spring-boot"
+
+tap "tufin/homebrew-tufin"
+brew "oasdiff"
