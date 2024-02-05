@@ -7,6 +7,10 @@ local footer_config_defaults = {
 	height = 0.3,
 	groups = {
 		{
+			name = 'terminal',
+			widgets = { { name = 'terminal', width = 1 } }
+		},
+		{
 			name = 'frames_scopes',
 			widgets = {
 				{ name = 'frames', width = 0.3 },
@@ -20,10 +24,6 @@ local footer_config_defaults = {
 				{ name = 'threads', width = 0.4 },
 				{ name = 'expression', width = 0.3 },
 			}
-		},
-		{
-			name = 'terminal',
-			widgets = { { name = 'terminal', width = 1 } }
 		},
 	},
 }

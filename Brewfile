@@ -9,6 +9,7 @@ if OS.mac?
 	# Applications
 	cask "kitty"
 	cask "notion"
+	cask "wezterm"
 end
 
 brew "asdf"
