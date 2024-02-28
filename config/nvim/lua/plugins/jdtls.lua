@@ -48,7 +48,7 @@ local on_attach = function(client, bufnr)
 		hotcodereplace = 'auto',
 		config_overrides = {
 			-- AllowRedefinitionToAddDeleteMethods required for BlockHound
-			vmArgs = '-XX:+AllowRedefinitionToAddDeleteMethods -Dspring.profiles.active=local,private'
+			vmArgs = '-XX:+AllowRedefinitionToAddDeleteMethods -Djava.rmi.server.hostname=localhost -Dspring.profiles.active=local,private'
 		}
 	})
 	jdtls.setup.add_commands()
