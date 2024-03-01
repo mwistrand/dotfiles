@@ -38,4 +38,6 @@ alias pip="python -m pip"
 alias hdoc="bat ~/.config/help/dotfiles.txt"
 
 # fnm
-eval "$(fnm env --multi)"
+if [[ -x "$(command -v fnm)" ]]; then
+    eval "$(fnm env --use-on-cd)"
+fi
