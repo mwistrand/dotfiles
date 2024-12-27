@@ -41,3 +41,5 @@ alias hdoc="bat ~/.config/help/dotfiles.txt"
 if [[ -x "$(command -v fnm)" ]]; then
     eval "$(fnm env --use-on-cd)"
 fi
+
+autoload -U +X bashcompinit && bashcompinit
