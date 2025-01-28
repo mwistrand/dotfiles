@@ -22,6 +22,14 @@ require('lazy').setup({
 	'Mofiqul/dracula.nvim',
 	'folke/tokyonight.nvim',
 
+	-- Copilot
+	{
+		'zbirenbaum/copilot.lua',
+		config = function()
+			require('copilot').setup()
+		end
+	},
+
 	-- Toggle comments with gcc
 	'tpope/vim-commentary',
 
@@ -95,6 +103,7 @@ require('lazy').setup({
 			'hrsh7th/cmp-nvim-lsp',
 			'hrsh7th/cmp-nvim-lsp-signature-help',
 			'hrsh7th/cmp-path',
+			'zbirenbaum/copilot-cmp',
 			'onsails/lspkind-nvim',
 		},
 	},
@@ -117,9 +126,6 @@ require('lazy').setup({
 	-- HTML
 	{ 'gregsexton/MatchTag', ft = 'html' },
 	{ 'othree/html5.vim', ft = 'html' },
-
-	-- Markdown
-	{ 'ellisonleao/glow.nvim', cmd = 'Glow', config = true, ft = 'markdown' },
 
 	-- JavaScript
 	{ 'elzr/vim-json', ft = 'json' },
@@ -160,15 +166,6 @@ require('lazy').setup({
 			{'<leader>xd', '<cmd>TroubleToggle document_diagnostics<cr>'},
 			{'<leader>xq', '<cmd>TroubleToggle quickfix<cr>'},
 			{'<leader>xl', '<cmd>TroubleToggle loclist<cr>'},
-		}
-	},
-
-	-- Writing
-	{
-		'junegunn/goyo.vim',
-		ft = 'markdown',
-		keys = {
-			{'<LocalLeader>v', '<cmd>Goyo<cr>'}
 		}
 	},
 })

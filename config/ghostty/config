@@ -1,0 +1,11 @@
+theme = tokyonight_moon
+background-opacity = 0.75
+bold-is-bright = true
+
+# window settings
+# macos-titlebar-style = hidden
+# window-decoration = true
+
+clipboard-read = allow
+clipboard-write = allow
+clipboard-trim-trailing-spaces = true

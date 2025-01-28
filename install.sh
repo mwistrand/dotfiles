@@ -45,45 +45,46 @@ create_symlinks() {
 	symlink_files_in_dir "clojure"
 }
 
-create_language_files() {
-	echo -e "Creating language files for ltex..."
-	mkdir -p "$HOME/.config/spell"
-	touch "$HOME/.config/spell/en.utf-8.add"
-}
-
-install_brew_packages() {
-	if [ "$(uname)" == "Darwin" ]; then
-		echo -e "Install homebrew packages?"
-		select yn in "Yes" "No"; do
-			case $yn in
-				Yes )
-					if test ! "$(command -v brew)"; then
-						echo "Homebrew not installed. Installing."
-						# Run as a login shell (non-interactive) so that the script doesn't pause for user input
-						curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | bash --login
-					fi
-
-					# install brew dependencies from Brewfile
-					brew bundle
-
-					# install fzf
-					echo "Installing fzf"
-					"$(brew --prefix)"/opt/fzf/install --key-bindings --completion --no-update-rc --no-bash --no-fish
-					break;;
-
-				No )
-					exit;;
-			esac
-		done
-	fi
-}
-
-fix_terminfo() {
-	echo -e "Fixing italics in tmux..."
-	tic -x "$DOTFILES/terminfo/italics.terminfo"
-}
-
-create_symlinks
-create_language_files
-install_brew_packages
-fix_terminfo
+# create_language_files() {
+# 	echo -e "Creating language files for ltex..."
+# 	mkdir -p "$HOME/.config/spell"
+# 	touch "$HOME/.config/spell/en.utf-8.add"
+# }
+#
+# install_brew_packages() {
+# 	if [ "$(uname)" == "Darwin" ]; then
+# 		echo -e "Install homebrew packages?"
+# 		select yn in "Yes" "No"; do
+# 			case $yn in
+# 				Yes )
+# 					if test ! "$(command -v brew)"; then
+# 						echo "Homebrew not installed. Installing."
+# 						# Run as a login shell (non-interactive) so that the script doesn't pause for user input
+# 						curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | bash --login
+# 					fi
+#
+# 					# install brew dependencies from Brewfile
+# 					brew bundle
+#
+# 					# install fzf
+# 					echo "Installing fzf"
+# 					"$(brew --prefix)"/opt/fzf/install --key-bindings --completion --no-update-rc --no-bash --no-fish
+# 					break;;
+#
+# 				No )
+# 					exit;;
+# 			esac
+# 		done
+# 	fi
+# }
+#
+# fix_terminfo() {
+# 	echo -e "Fixing italics in tmux..."
+# 	tic -x "$DOTFILES/terminfo/italics.terminfo"
+# }
+#
+# create_symlinks
+# create_language_files
+# install_brew_packages
+# fix_terminfo
+symlink_files_in_dir "config"

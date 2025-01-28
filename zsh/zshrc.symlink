@@ -31,8 +31,9 @@ alias gs="git status"
 alias gb="git branch --show-current"
 
 # Python aliases
-alias python=python3.12
+alias python=python3.13
 alias pip="python -m pip"
+alias venv="source .venv/bin/activate"
 
 # Show doftiles help doc
 alias hdoc="bat ~/.config/help/dotfiles.txt"

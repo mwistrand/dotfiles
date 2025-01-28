@@ -7,8 +7,7 @@ if OS.mac?
 	cask "font-3270-nerd-font"
 
 	# Applications
-	cask "kitty"
-	cask "notion"
+	cask "ghostty"
 	cask "wezterm"
 end
 

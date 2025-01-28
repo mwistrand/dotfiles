@@ -19,7 +19,7 @@ mason.setup({
 })
 
 mason_lspconfig.setup({
-    ensure_installed = { 'angularls', 'gopls', 'jdtls', 'ltex', 'lua_ls', 'tsserver' },
+    ensure_installed = { 'angularls', 'gopls', 'jdtls', 'ltex', 'lua_ls', 'pyright', 'tsserver' },
     automatic_installation = true,
     ui = { check_outdated_servers_on_open = true },
 })
@@ -89,6 +89,19 @@ lspconfig.ltex.setup(create_config(function(config)
             dictionary = {
                 ['en-US'] = add_dictionary('en')
             }
+        },
+    }
+    return config
+end))
+
+lspconfig.pyright.setup(create_config(function(config)
+    config.settings = {
+        python = {
+            analysis = {
+                autoSearchPaths = true,
+                useLibraryCodeForTypes = true,
+                diagnosticMode = 'workspace',
+            },
         },
     }
     return config
