@@ -20,7 +20,12 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
 	-- Colorschemes
 	'Mofiqul/dracula.nvim',
-	'folke/tokyonight.nvim',
+	{
+		'folke/tokyonight.nvim',
+		opts = {
+			transparent = true
+		}
+	},
 
 	-- Copilot
 	{
@@ -77,7 +82,7 @@ require('lazy').setup({
 		'williamboman/mason.nvim', -- manage language servers,
 		dependencies = {
 			'williamboman/mason-lspconfig.nvim', -- automatically install language servers,
-			'jose-elias-alvarez/null-ls.nvim',
+			'nvimtools/none-ls.nvim',
 		},
 	},
 	{
