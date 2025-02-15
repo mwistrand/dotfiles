@@ -1,10 +1,6 @@
 theme = tokyonight_moon
-background-opacity = 0.9
+background-opacity = 0.85
 bold-is-bright = true
-
-# window settings
-# macos-titlebar-style = hidden
-# window-decoration = true
 
 clipboard-read = allow
 clipboard-write = allow

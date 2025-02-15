@@ -19,7 +19,7 @@ mason.setup({
 })
 
 mason_lspconfig.setup({
-    ensure_installed = { 'angularls', 'gopls', 'jdtls', 'ltex', 'lua_ls', 'pyright', 'tsserver' },
+    ensure_installed = { 'angularls', 'basedpyright', 'gopls', 'jdtls', 'ltex', 'lua_ls', 'ts_ls' },
     automatic_installation = true,
     ui = { check_outdated_servers_on_open = true },
 })
@@ -94,20 +94,21 @@ lspconfig.ltex.setup(create_config(function(config)
     return config
 end))
 
-lspconfig.pyright.setup(create_config(function(config)
+lspconfig.basedpyright.setup(create_config(function(config)
     config.settings = {
         python = {
             analysis = {
                 autoSearchPaths = true,
                 useLibraryCodeForTypes = true,
-                diagnosticMode = 'workspace',
+                diagnosticMode = 'openFilesOnly',
+                typeCheckingMode = 'off'
             },
         },
     }
     return config
 end))
 
-lspconfig.tsserver.setup(create_config(function(config)
+lspconfig.ts_ls.setup(create_config(function(config)
     config.root_dir = lspconfig.util.root_pattern('tsconfig.json')
     return config
 end))

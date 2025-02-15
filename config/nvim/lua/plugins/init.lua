@@ -23,8 +23,20 @@ require('lazy').setup({
 	{
 		'folke/tokyonight.nvim',
 		opts = {
-			transparent = true
-		}
+			transparent = true,
+			styles = {
+				sidebars = "transparent",
+				floats = "transparent"
+			},
+			on_highlights = function(hl, colors)
+				hl.LineNr = {
+					fg = colors.blue2
+				}
+				hl.CursorLineNr = {
+					fg = colors.blue2
+				}
+			end
+		},
 	},
 
 	-- Copilot
@@ -41,7 +53,12 @@ require('lazy').setup({
 	-- VCS management
 	'tpope/vim-fugitive',
 	'nvim-lua/plenary.nvim',
-	'lewis6991/gitsigns.nvim',
+	{
+		'lewis6991/gitsigns.nvim',
+		config = function()
+			require('gitsigns').setup()
+		end
+	},
 
 	-- Toggle comments with gcc
 	'tpope/vim-commentary',
@@ -73,7 +90,9 @@ require('lazy').setup({
 	-- Fuzzy finder
 	{
 		'nvim-telescope/telescope.nvim',
-		dependencies = { 'nvim-telescope/telescope-dap.nvim', }
+		dependencies = {
+			'nvim-telescope/telescope-dap.nvim',
+		}
 	},
 
 	-- language server
@@ -173,6 +192,15 @@ require('lazy').setup({
 			{'<leader>xl', '<cmd>TroubleToggle loclist<cr>'},
 		}
 	},
+
+	-- Improved Unicode Support
+	{
+		'chrisbra/unicode.vim',
+		config = function()
+			utils.imap('<C-g><C-f>','<NOP>', { expr = true })
+			utils.imap('<C-x>','<Plug>(UnicodeFuzzy)', { expr = false })
+		end
+	},
 })
 
 if fn.executable('rg') then
@@ -181,7 +209,6 @@ end
 
 require('plugins.formatter')
 require('plugins.fzf')
-require('plugins.gitsigns')
 require('plugins.lspconfig')
 require('plugins.cmp')
 require('plugins.dap')

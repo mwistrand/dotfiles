@@ -1,5 +1,6 @@
 local actions = require('telescope.actions')
 local nnoremap = require('utils').nnoremap
+local inoremap = require('utils').inoremap
 local telescope = require('telescope')
 
 nnoremap('\\', '<cmd>Telescope live_grep<cr>')
