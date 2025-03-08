@@ -43,7 +43,37 @@ require('lazy').setup({
 	{
 		'zbirenbaum/copilot.lua',
 		config = function()
-			require('copilot').setup()
+			require('copilot').setup({
+				cmd = 'Copilot',
+				cond = not vim.g.vscode,
+				build = ':Copilot auth',
+				event = 'InsertEnter',
+				opts = {
+					suggestion = {
+						enabled = true,
+						auto_trigger = true,
+						keymap = {
+							accept = '<Tab>',
+							close = '<Esc>',
+							next = '<C-J>',
+							prev = '<C-K>',
+							select = '<CR>',
+							dismiss = '<C-X>',
+						},
+					},
+					panel = {
+						enabled = false,
+					},
+				},
+				{
+					'zbirenbaum/copilot-cmp',
+					cond = not vim.g.vscode,
+					dependencies = {
+						'hrsh7th/nvim-cmp',
+					},
+					config = true,
+				},
+			})
 		end
 	},
 
@@ -182,7 +212,7 @@ require('lazy').setup({
 					scratch_repl = true,
 					repl_definition = {
 						python = {
-							command = { 'python3' },
+							command = { 'ipython', '--no-autoindent' },
 							format = require('iron.fts.common').bracketed_paste_python,
 						},
 					},
