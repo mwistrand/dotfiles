@@ -39,44 +39,6 @@ require('lazy').setup({
 		},
 	},
 
-	-- Copilot
-	{
-		'zbirenbaum/copilot.lua',
-		config = function()
-			require('copilot').setup({
-				cmd = 'Copilot',
-				cond = not vim.g.vscode,
-				build = ':Copilot auth',
-				event = 'InsertEnter',
-				opts = {
-					suggestion = {
-						enabled = true,
-						auto_trigger = true,
-						keymap = {
-							accept = '<Tab>',
-							close = '<Esc>',
-							next = '<C-J>',
-							prev = '<C-K>',
-							select = '<CR>',
-							dismiss = '<C-X>',
-						},
-					},
-					panel = {
-						enabled = false,
-					},
-				},
-				{
-					'zbirenbaum/copilot-cmp',
-					cond = not vim.g.vscode,
-					dependencies = {
-						'hrsh7th/nvim-cmp',
-					},
-					config = true,
-				},
-			})
-		end
-	},
-
 	-- Toggle comments with gcc
 	'tpope/vim-commentary',
 
@@ -270,6 +232,100 @@ require('lazy').setup({
 			utils.imap('<C-g><C-f>','<NOP>', { expr = true })
 			utils.imap('<C-x>','<Plug>(UnicodeFuzzy)', { expr = false })
 		end
+	},
+
+	-- Copilot
+	{
+		'zbirenbaum/copilot.lua',
+		config = function()
+			require('copilot').setup({
+				cmd = 'Copilot',
+				cond = not vim.g.vscode,
+				build = ':Copilot auth',
+				event = 'InsertEnter',
+				opts = {
+					suggestion = {
+						enabled = true,
+						auto_trigger = true,
+						keymap = {
+							accept = '<Tab>',
+							close = '<Esc>',
+							next = '<C-J>',
+							prev = '<C-K>',
+							select = '<CR>',
+							dismiss = '<C-X>',
+						},
+					},
+					panel = {
+						enabled = false,
+					},
+				},
+				{
+					'zbirenbaum/copilot-cmp',
+					cond = not vim.g.vscode,
+					dependencies = {
+						'hrsh7th/nvim-cmp',
+					},
+					config = true,
+				},
+			})
+		end
+	},
+
+	-- Cursive-like AI integration
+	{
+		'yetone/avante.nvim',
+		lazy = false,
+		event = 'VeryLazy',
+		lazy = false,
+		version = false,
+		opts = {
+			provider = 'copilot',
+		},
+		suggestion = {
+			debounce = 2000
+		},
+		build = 'make',
+		dependencies = {
+			'stevearc/dressing.nvim',
+			'nvim-lua/plenary.nvim',
+			'MunifTanjim/nui.nvim',
+			--- The below dependencies are optional,
+			'nvim-tree/nvim-web-devicons',
+			'zbirenbaum/copilot.lua',
+			{
+				-- support for image pasting
+				'HakonHarnes/img-clip.nvim',
+				event = 'VeryLazy',
+				opts = {
+					-- recommended settings
+					default = {
+						embed_image_as_base64 = false,
+						prompt_for_file_name = false,
+						drag_and_drop = {
+							insert_mode = true,
+						},
+						-- required for Windows users
+						use_absolute_path = true,
+					},
+				},
+			},
+			{
+				'MeanderingProgrammer/render-markdown.nvim',
+				opts = {
+					file_types = { 'Avante' },
+					latex = { enabled = false },
+				},
+				ft = { 'Avante' },
+			},
+			{
+				'jbyuki/nabla.nvim',
+				ft = { 'Avante' },
+				config = function()
+					utils.nmap('<Leader>p', ':lua require("nabla").popup()<cr>')
+				end
+			},
+		},
 	},
 })
 
