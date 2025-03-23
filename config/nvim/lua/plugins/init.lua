@@ -245,98 +245,23 @@ require('lazy').setup({
 	},
 
 	-- Copilot
-	{
-		'zbirenbaum/copilot.lua',
-		config = function()
-			require('copilot').setup({
-				cmd = 'Copilot',
-				cond = not vim.g.vscode,
-				build = ':Copilot auth',
-				event = 'InsertEnter',
-				opts = {
-					suggestion = {
-						enabled = true,
-						auto_trigger = true,
-						keymap = {
-							accept = '<Tab>',
-							close = '<Esc>',
-							next = '<C-J>',
-							prev = '<C-K>',
-							select = '<CR>',
-							dismiss = '<C-X>',
-						},
-					},
-					panel = {
-						enabled = false,
-					},
-				},
-				{
-					'zbirenbaum/copilot-cmp',
-					cond = not vim.g.vscode,
-					dependencies = {
-						'hrsh7th/nvim-cmp',
-					},
-					config = true,
-				},
-			})
-		end
-	},
+	{ 'zbirenbaum/copilot.lua' },
 
-	-- Cursive-like AI integration
 	{
-		'yetone/avante.nvim',
-		lazy = false,
-		event = 'VeryLazy',
-		lazy = false,
-		version = false,
-		opts = {
-			provider = 'copilot',
-		},
-		suggestion = {
-			debounce = 2000
-		},
-		build = 'make',
+		'CopilotC-Nvim/CopilotChat.nvim',
 		dependencies = {
-			'stevearc/dressing.nvim',
-			'nvim-lua/plenary.nvim',
-			'MunifTanjim/nui.nvim',
-			--- The below dependencies are optional,
-			'nvim-tree/nvim-web-devicons',
-			'zbirenbaum/copilot.lua',
-			{
-				-- support for image pasting
-				'HakonHarnes/img-clip.nvim',
-				event = 'VeryLazy',
-				opts = {
-					-- recommended settings
-					default = {
-						embed_image_as_base64 = false,
-						prompt_for_file_name = false,
-						drag_and_drop = {
-							insert_mode = true,
-						},
-						-- required for Windows users
-						use_absolute_path = true,
-					},
-				},
-			},
+			{ 'zbirenbaum/copilot.lua' },
+			{ 'nvim-lua/plenary.nvim' },
 			{
 				'MeanderingProgrammer/render-markdown.nvim',
 				opts = {
-					file_types = { 'Avante' },
-					latex = { enabled = false },
+					file_types = { 'copilot-chat' },
 				},
-				ft = { 'Avante' },
-			},
-			{
-				'jbyuki/nabla.nvim',
-				ft = { 'Avante' },
-				config = function()
-					utils.nmap('<Leader>p', ':lua require("nabla").popup()<cr>')
-				end
+				ft = { 'copilot-chat' },
 			},
 		},
 	},
+
 })
 
 if fn.executable('rg') then
@@ -347,6 +272,7 @@ require('plugins.formatter')
 require('plugins.fzf')
 require('plugins.lspconfig')
 require('plugins.cmp')
+require('plugins.copilot')
 require('plugins.dap')
 require('plugins.jdtls')
 require('plugins.lualine')

@@ -29,6 +29,8 @@ opt.backup = false -- disable backups when saving files
 opt.swapfile = false -- don't create swap files
 opt.timeoutlen = 1000 -- mapped sequence timeout
 opt.writebackup = false -- don't write a backup before saving
+opt.splitbelow = true
+opt.splitright = true
 
 -- Tab management
 opt.shiftround = true -- use multiples of opt.shiftwidth when indenting
