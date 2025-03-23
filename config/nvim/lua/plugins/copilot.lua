@@ -70,3 +70,13 @@ chat.setup({
 nnoremap('<leader>aa', chat.toggle, { desc = 'AI toggle' })
 nnoremap('<leader>ax', chat.reset, { desc = 'AI reset' })
 nnoremap('<leader>as', chat.stop, { desc = 'AI stop' })
+nnoremap('<leader>ap', chat.select_prompt, { desc = 'AI Prompts' })
+nnoremap('<leader>aq', function()
+	vim.ui.input({
+		prompt = 'AI Question> ',
+	}, function(input)
+		if input ~= '' then
+			chat.ask(input)
+		end
+	end)
+end, { desc = 'AI Question' })
