@@ -147,6 +147,10 @@ local jdtls_config = {
 						name = 'JavaSE-21',
 						path = home .. '/.asdf/installs/java/openjdk-21.0.1',
 					},
+					{
+						name = 'JavaSE-24',
+						path = home .. '/.asdf/installs/java/openjdk-24',
+					},
 				}
 			}
 		}
@@ -158,7 +162,7 @@ local jdtls_config = {
 	-- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
 	-- for the full list of options
 	cmd = {
-		home .. '/.asdf/installs/java/openjdk-21.0.1/bin/java',
+		home .. '/.asdf/installs/java/openjdk-24/bin/java',
 		'-Declipse.application=org.eclipse.jdt.ls.core.id1',
 		'-Dosgi.bundles.defaultStartLevel=4',
 		'-Declipse.product=org.eclipse.jdt.ls.core.product',
@@ -172,11 +176,11 @@ local jdtls_config = {
 
 		-- The jar file is located where jdtls was installed. This will need to be updated
 		-- to the location where you installed jdtls
-		'-jar', vim.fn.glob('/opt/homebrew/Cellar/jdtls/1.42.0/libexec/plugins/org.eclipse.equinox.launcher_*.jar'),
+		'-jar', vim.fn.glob('/opt/homebrew/Cellar/jdtls/1.45.0/libexec/plugins/org.eclipse.equinox.launcher_*.jar'),
 
 		-- The configuration for jdtls is also placed where jdtls was installed. This will
 		-- need to be updated depending on your environment
-		'-configuration', '/opt/homebrew/Cellar/jdtls/1.42.0/libexec/config_mac',
+		'-configuration', '/opt/homebrew/Cellar/jdtls/1.45.0/libexec/config_mac',
 
 		-- Use the workspace_folder defined above to store data for this project
 		'-data', workspace_folder,

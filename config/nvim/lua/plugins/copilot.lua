@@ -64,6 +64,12 @@ chat.setup({
 			mapping = '<leader>ad',
 			description = 'AI Documentation',
 		},
+		Generate = {
+			prompt = 'Generate code from the selected comment block',
+			system_prompt = 'You are a code generator focused on clear, easy-to-read code',
+			mapping = '<leader>ag',
+			description = 'AI Generation',
+		},
 	},
 })
 
