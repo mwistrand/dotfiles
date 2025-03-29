@@ -39,6 +39,11 @@ chat.setup({
 		position = 'right',
 		width = 0.4,
 	},
+	mappings = {
+		accept_diff = {
+			normal = '<leader>ay'
+		},
+	},
 	prompts = {
 		Explain = {
 			mapping = '<leader>ae',
