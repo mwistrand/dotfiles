@@ -194,11 +194,9 @@ require('lazy').setup({
 		'folke/trouble.nvim',
 		config = true,
 		keys = {
-			{'<leader>xx', '<cmd>TroubleToggle<cr>'},
-			{'<leader>xw', '<cmd>TroubleToggle workspace_diagnostics<cr>'},
-			{'<leader>xd', '<cmd>TroubleToggle document_diagnostics<cr>'},
-			{'<leader>xq', '<cmd>TroubleToggle quickfix<cr>'},
-			{'<leader>xl', '<cmd>TroubleToggle loclist<cr>'},
+			{'<leader>xx', '<cmd>Trouble diagnostics toggle filter.buf=0<cr>'},
+			{'<leader>xw', '<cmd>Trouble diagnostics toggle<cr>'},
+			{'<leader>xq', '<cmd>Trouble qflist toggle<cr>'},
 		}
 	},
 
