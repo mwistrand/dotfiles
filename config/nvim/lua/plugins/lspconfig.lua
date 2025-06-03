@@ -19,7 +19,7 @@ mason.setup({
 })
 
 mason_lspconfig.setup({
-    ensure_installed = { 'angularls', 'basedpyright', 'gopls', 'jdtls', 'ltex', 'lua_ls', 'ts_ls' },
+    ensure_installed = { 'angularls', 'basedpyright', 'gopls', 'jdtls', 'lua_ls', 'ts_ls' },
     automatic_installation = true,
     ui = { check_outdated_servers_on_open = true },
 })
@@ -78,21 +78,6 @@ local function add_dictionary(language)
     end
     return dictionary
 end
-
-lspconfig.ltex.setup(create_config(function(config)
-    vim.opt.spellfile = get_dictionary_path('en')
-    config.cmd = { 'ltex-ls' }
-    config.flags = { debounce_text_changes = 300 }
-    config.settings = {
-        ltex = {
-            language = 'en-US',
-            dictionary = {
-                ['en-US'] = add_dictionary('en')
-            }
-        },
-    }
-    return config
-end))
 
 lspconfig.basedpyright.setup(create_config(function(config)
     config.settings = {
