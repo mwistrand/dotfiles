@@ -219,20 +219,69 @@ require('lazy').setup({
 		end
 	},
 
-	-- Copilot
+	-- AI Assistance
 	{ 'zbirenbaum/copilot.lua' },
 
 	{
-		'CopilotC-Nvim/CopilotChat.nvim',
+		'olimorris/codecompanion.nvim',
 		dependencies = {
-			{ 'zbirenbaum/copilot.lua' },
-			{ 'nvim-lua/plenary.nvim' },
+			'nvim-lua/plenary.nvim',
+			'nvim-treesitter/nvim-treesitter',
 			{
 				'MeanderingProgrammer/render-markdown.nvim',
-				opts = {
-					file_types = { 'copilot-chat' },
+				ft = { 'codecompanion' }
+			},
+			{
+				'echasnovski/mini.diff',
+				config = function()
+					local diff = require('mini.diff')
+					diff.setup({
+						-- Disabled by default
+						source = diff.gen_source.none(),
+					})
+				end,
+			},
+		},
+		init = function()
+			cmd([[cab cc CodeCompanion]])
+		end,
+		opts = {
+			display = {
+				action_palette = {
+					provider = 'telescope',
 				},
-				ft = { 'copilot-chat' },
+				chat = {
+					window = {
+						full_height = true,
+						width = 0.4,
+					}
+				},
+				diff = {
+					provider = 'mini_diff',
+				},
+			},
+			opts = {
+				log_level = 'DEBUG',
+			},
+		},
+		keys = {
+			{
+				'<Leader>aa',
+				'<cmd>CodeCompanionChat Toggle<CR>',
+				desc = 'Toggle a chat buffer',
+				mode = { 'n', 'v' },
+			},
+			{
+				'<Leader>ac',
+				'<cmd>CodeCompanionChat Add<CR>',
+				desc = 'Add code to a chat buffer',
+				mode = { 'v' },
+			},
+			{
+				'<Leader>ap',
+				'<cmd>CodeCompanionActions<CR>',
+				desc = 'Open the action palette',
+				mode = { 'n', 'v' },
 			},
 		},
 	},
@@ -247,7 +296,7 @@ require('plugins.formatter')
 require('plugins.fzf')
 require('plugins.lspconfig')
 require('plugins.cmp')
-require('plugins.copilot')
+require('plugins.ai')
 require('plugins.dap')
 require('plugins.jdtls')
 require('plugins.lualine')
