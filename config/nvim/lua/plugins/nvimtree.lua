@@ -2,20 +2,7 @@
 local nvimtree = require('nvim-tree')
 local nnoremap = require('utils').nnoremap
 
-local view = require('nvim-tree.view')
-_G.NvimTreeConfig = {}
-
-function NvimTreeConfig.find_toggle()
-  if view.is_visible() then
-    view.close()
-  else
-    vim.cmd('NvimTreeToggle')
-  end
-end
-
-nnoremap('<leader>k', '<CMD>lua NvimTreeConfig.find_toggle()<CR>')
-
-view.width = 40
+nnoremap('<leader>k', ':NvimTreeToggle<cr>')
 
 local function on_attach(bufnr)
   local api = require('nvim-tree.api')
