@@ -1,5 +1,4 @@
 local copilot = require('copilot')
-local nnoremap = require('utils').nnoremap
 
 copilot.setup({
 	cmd = 'Copilot',
