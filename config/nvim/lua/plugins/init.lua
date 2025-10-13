@@ -35,6 +35,10 @@ require('lazy').setup({
 				hl.CursorLineNr = {
 					fg = colors.blue2
 				}
+				hl.DiagnosticUnnecessary = {
+					fg = colors.comment,
+					italic = true
+				}
 			end
 		},
 	},
