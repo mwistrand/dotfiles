@@ -151,6 +151,9 @@ require('lazy').setup({
 		end
 	},
 
+	-- Svelte
+	'evanleck/vim-svelte',
+
 	-- HTML
 	{ 'gregsexton/MatchTag', ft = 'html' },
 	{ 'othree/html5.vim', ft = 'html' },
@@ -282,7 +285,7 @@ require('lazy').setup({
 				mode = { 'v' },
 			},
 			{
-				'<Leader>ap',
+				'<Leader>ax',
 				'<cmd>CodeCompanionActions<CR>',
 				desc = 'Open the action palette',
 				mode = { 'n', 'v' },

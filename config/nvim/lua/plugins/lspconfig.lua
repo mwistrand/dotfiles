@@ -19,8 +19,9 @@ mason.setup({
 })
 
 mason_lspconfig.setup({
-    ensure_installed = { 'angularls', 'basedpyright', 'gopls', 'jdtls', 'lua_ls', 'ts_ls' },
+    ensure_installed = { 'angularls', 'html', 'basedpyright', 'gopls', 'jdtls', 'lua_ls', 'svelte', 'tailwindcss' },
     automatic_installation = true,
+    automatic_enable = true,
     ui = { check_outdated_servers_on_open = true },
 })
 
@@ -53,6 +54,12 @@ local on_attach = function(client, bufnr)
     nnoremap('<LocalLeader>wl', function()
             print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, opts)
+
+    -- use angularls for renames
+    local clients = vim.lsp.get_clients({ bufnr = bufnr, name = 'angularls' })
+    if #clients > 0 then
+      client.server_capabilities.renameProvider = false
+    end
 end
 
 local create_config = function(factory)
@@ -66,19 +73,6 @@ local create_config = function(factory)
     return factory({ capabilities = capabilities, on_attach = on_attach })
 end
 
-local function get_dictionary_path(language)
-    return vim.env.HOME .. '/.config/spell/' .. language .. '.utf-8.add'
-end
-
-local function add_dictionary(language)
-    local dictionary = {}
-    local file = io.open('/Users/mwistrand/.config/spell/en.utf-8.add', 'r')
-    for word in file:lines() do
-        table.insert(dictionary, word)
-    end
-    return dictionary
-end
-
 lspconfig.basedpyright.setup(create_config(function(config)
     config.settings = {
         python = {
@@ -90,11 +84,6 @@ lspconfig.basedpyright.setup(create_config(function(config)
             },
         },
     }
-    return config
-end))
-
-lspconfig.ts_ls.setup(create_config(function(config)
-    config.root_dir = lspconfig.util.root_pattern('tsconfig.json')
     return config
 end))
 
