@@ -102,6 +102,25 @@ To install: `brew bundle` (on macOS)
 - `config/kitty/`: Kitty terminal emulator config
 - `config/tmux/`: Tmux configuration
 - `config/help/`: Custom help documentation
+- `config/claude/agents/`: Claude Code custom agents (26 specialized agents)
+- `config/opencode/agent/`: OpenCode agents (original versions)
+
+## Claude Code Agents
+
+This repository includes 26 specialized Claude Code agents in `config/claude/agents/`:
+- **angular-expert**: Angular development with RxJS and NgRx
+- **code-reviewer**: Comprehensive code review and security analysis
+- **frontend-developer**: React 19, Next.js 15, modern frontend
+- **backend-architect**: Backend services and API design
+- **security-auditor**: Security vulnerabilities and compliance
+- **performance-engineer**: Performance optimization and profiling
+- **test-automator**: Testing strategies and automation
+- **debugger**: Advanced debugging and troubleshooting
+- **git-specialist**: Git workflows and version control
+- **database-admin**: Database management and optimization
+- And 16 more specialized agents...
+
+Agents are automatically symlinked to `~/.claude/agents/` during installation.
 
 ## Common Development Tasks
 
@@ -110,6 +129,7 @@ Since this is a dotfiles repository, most "development" involves:
 2. Changes take effect immediately for symlinked files (no rebuild needed)
 3. For shell changes: source `~/.zshrc` or restart terminal
 4. For nvim changes: restart nvim or reload with `:source ~/.config/nvim/init.lua`
+5. For Claude agents: edit files in `config/claude/agents/`, they're symlinked to `~/.claude/agents/`
 
 ## Git Workflow
 
