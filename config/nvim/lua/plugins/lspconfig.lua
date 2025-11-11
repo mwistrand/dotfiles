@@ -19,7 +19,7 @@ mason.setup({
 })
 
 mason_lspconfig.setup({
-    ensure_installed = { 'angularls', 'html', 'basedpyright', 'gopls', 'jdtls', 'lua_ls', 'svelte', 'tailwindcss' },
+    ensure_installed = { 'angularls', 'eslint', 'html', 'basedpyright', 'gopls', 'jdtls', 'lua_ls', 'svelte', 'tailwindcss', 'ts_ls' },
     automatic_installation = true,
     automatic_enable = true,
     ui = { check_outdated_servers_on_open = true },
@@ -55,21 +55,26 @@ local on_attach = function(client, bufnr)
             print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, opts)
 
-    -- use angularls for renames
-    local clients = vim.lsp.get_clients({ bufnr = bufnr, name = 'angularls' })
-    if #clients > 0 then
-      client.server_capabilities.renameProvider = false
+    -- When angularls is attached, disable rename for ts_ls to avoid conflicts
+    -- angularls provides better rename support across component/template boundaries
+    local angularls_clients = vim.lsp.get_clients({ bufnr = bufnr, name = 'angularls' })
+    if #angularls_clients > 0 and client.name == 'ts_ls' then
+        client.server_capabilities.renameProvider = false
     end
 
-    -- Format on save if supported
-    if client.server_capabilities.documentFormattingProvider then
-        vim.api.nvim_create_autocmd('BufWritePre', {
-            buffer = bufnr,
-            callback = function()
-                vim.lsp.buf.format({ async = false })
-            end,
-        })
+    -- Disable formatting for ts_ls - let eslint or prettier handle it
+    if client.name == 'ts_ls' then
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
     end
+
+    -- Format on save
+    vim.api.nvim_create_autocmd('BufWritePre', {
+        buffer = bufnr,
+        callback = function()
+            vim.lsp.buf.format({ async = false })
+        end,
+    })
 end
 
 local create_config = function(factory)
@@ -109,6 +114,88 @@ lspconfig.gopls.setup(create_config(function(config)
             staticcheck = true,
         },
     }
+    return config
+end))
+
+-- TypeScript/JavaScript LSP
+-- Supports multi-root workspaces with multiple tsconfig.json files
+lspconfig.ts_ls.setup(create_config(function(config)
+    config.filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' }
+    config.root_dir = lspconfig.util.root_pattern('package.json', 'tsconfig.json', 'jsconfig.json', '.git')
+    config.settings = {
+        typescript = {
+            inlayHints = {
+                includeInlayParameterNameHints = 'all',
+                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+                includeInlayFunctionParameterTypeHints = true,
+                includeInlayVariableTypeHints = true,
+                includeInlayPropertyDeclarationTypeHints = true,
+                includeInlayFunctionLikeReturnTypeHints = true,
+                includeInlayEnumMemberValueHints = true,
+            },
+        },
+        javascript = {
+            inlayHints = {
+                includeInlayParameterNameHints = 'all',
+                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+                includeInlayFunctionParameterTypeHints = true,
+                includeInlayVariableTypeHints = true,
+                includeInlayPropertyDeclarationTypeHints = true,
+                includeInlayFunctionLikeReturnTypeHints = true,
+                includeInlayEnumMemberValueHints = true,
+            },
+        },
+    }
+    return config
+end))
+
+-- ESLint LSP - provides linting and formatting
+lspconfig.eslint.setup(create_config(function(config)
+    config.filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'vue', 'svelte' }
+    config.root_dir = lspconfig.util.root_pattern(
+        '.eslintrc',
+        '.eslintrc.js',
+        '.eslintrc.cjs',
+        '.eslintrc.yaml',
+        '.eslintrc.yml',
+        '.eslintrc.json',
+        'eslint.config.js',
+        'package.json'
+    )
+    config.settings = {
+        codeAction = {
+            disableRuleComment = {
+                enable = true,
+                location = 'separateLine'
+            },
+            showDocumentation = {
+                enable = true
+            }
+        },
+        codeActionOnSave = {
+            enable = false,  -- We handle this separately
+            mode = 'all'
+        },
+        format = true,
+        nodePath = '',
+        onIgnoredFiles = 'off',
+        packageManager = 'npm',
+        quiet = false,
+        rulesCustomizations = {},
+        run = 'onType',
+        useESLintClass = false,
+        validate = 'on',
+        workingDirectory = {
+            mode = 'location'
+        }
+    }
+    return config
+end))
+
+-- Angular LSP - provides Angular-specific features
+-- Works alongside ts_ls for full TypeScript + Angular support
+lspconfig.angularls.setup(create_config(function(config)
+    config.root_dir = lspconfig.util.root_pattern('angular.json', 'project.json')
     return config
 end))
 
