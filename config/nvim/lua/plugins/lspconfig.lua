@@ -60,6 +60,16 @@ local on_attach = function(client, bufnr)
     if #clients > 0 then
       client.server_capabilities.renameProvider = false
     end
+
+    -- Format on save if supported
+    if client.server_capabilities.documentFormattingProvider then
+        vim.api.nvim_create_autocmd('BufWritePre', {
+            buffer = bufnr,
+            callback = function()
+                vim.lsp.buf.format({ async = false })
+            end,
+        })
+    end
 end
 
 local create_config = function(factory)
