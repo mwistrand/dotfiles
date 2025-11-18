@@ -38,6 +38,8 @@ alias venv="source .venv/bin/activate"
 # Show doftiles help doc
 alias hdoc="bat ~/.config/help/dotfiles.txt"
 
+alias lzd="lazydocker"
+
 # fnm
 if [[ -x "$(command -v fnm)" ]]; then
     eval "$(fnm env --use-on-cd)"

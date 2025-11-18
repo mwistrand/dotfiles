@@ -106,6 +106,16 @@ require('lazy').setup({
 			require('fidget').setup({})
 		end
 	},
+	{
+		'antosha417/nvim-lsp-file-operations', -- extend LSP with file operations (e.g., refactor on rename)
+		dependencies = {
+			'nvim-lua/plenary.nvim',
+			'nvim-tree/nvim-tree.lua',
+		},
+		config = function()
+			require('lsp-file-operations').setup()
+		end,
+	},
 
 	-- syntax highlighting
 	{

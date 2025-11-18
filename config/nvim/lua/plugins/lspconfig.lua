@@ -26,7 +26,12 @@ mason_lspconfig.setup({
 })
 
 null_ls.setup({
-    sources = { null_ls.builtins.diagnostics.vale, },
+    sources = {
+        null_ls.builtins.diagnostics.vale,
+        null_ls.builtins.formatting.prettier.with({
+            filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte", "json", "yaml", "markdown" },
+        }),
+    },
 })
 
 local on_attach = function(client, bufnr)
@@ -43,6 +48,8 @@ local on_attach = function(client, bufnr)
 
     nnoremap('ga', vim.lsp.buf.code_action, opts)
     vnoremap('ga', vim.lsp.buf.code_action, opts)
+
+    nnoremap('<LocalLeader>ll', ':LspRestart<cr>', opts)
 
     nnoremap('<LocalLeader>rn', vim.lsp.buf.rename, opts)
     nnoremap('<LocalLeader>rf', function()
@@ -72,7 +79,18 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_create_autocmd('BufWritePre', {
         buffer = bufnr,
         callback = function()
-            vim.lsp.buf.format({ async = false })
+            -- Only format JS/TS files with null-ls (Prettier)
+            local ft = vim.api.nvim_buf_get_option(bufnr, "filetype")
+            if vim.tbl_contains({ "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte" }, ft) then
+                vim.lsp.buf.format({
+                    async = false,
+                    filter = function(client)
+                        return client.name == "null-ls"
+                    end,
+                })
+            else
+                vim.lsp.buf.format({ async = false })
+            end
         end,
     })
 end
@@ -82,8 +100,12 @@ local create_config = function(factory)
         return config
     end
 
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+    local capabilities = vim.tbl_deep_extend(
+        'force',
+        vim.lsp.protocol.make_client_capabilities(),
+        require('cmp_nvim_lsp').default_capabilities(),
+        require('lsp-file-operations').default_capabilities()
+    )
 
     return factory({ capabilities = capabilities, on_attach = on_attach })
 end
