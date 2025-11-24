@@ -82,8 +82,9 @@ utils.nnoremap('$', 'v:count == 0 ? "g$" : "$"', {expr = true})
 g.mapleader = ','
 g.maplocalleader = ';'
 
--- Buffer navigation
-utils.map('<Leader><Leader>', ':b#<cr>')
+-- Buffer management
+utils.map('<Leader><Leader>', ':b#<cr>') -- open previous buffer
+utils.map('<Leader>bb', ':%bd | e# | bd#<cr>') -- close all but current buffer
 
 require('plugins')
 
