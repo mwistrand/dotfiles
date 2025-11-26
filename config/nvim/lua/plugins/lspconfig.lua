@@ -29,7 +29,7 @@ null_ls.setup({
     sources = {
         null_ls.builtins.diagnostics.vale,
         null_ls.builtins.formatting.prettier.with({
-            filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte", "json", "yaml", "markdown" },
+            filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'vue', 'svelte', 'json', 'yaml', 'markdown' },
         }),
     },
 })
@@ -50,6 +50,7 @@ local on_attach = function(client, bufnr)
     vnoremap('ga', vim.lsp.buf.code_action, opts)
 
     nnoremap('<LocalLeader>ll', ':LspRestart<cr>', opts)
+    nnoremap('<LocalLeader>lc', ':cclose<cr>', opts)
 
     nnoremap('<LocalLeader>rn', vim.lsp.buf.rename, opts)
     nnoremap('<LocalLeader>rf', function()
@@ -80,12 +81,12 @@ local on_attach = function(client, bufnr)
         buffer = bufnr,
         callback = function()
             -- Only format JS/TS files with null-ls (Prettier)
-            local ft = vim.api.nvim_buf_get_option(bufnr, "filetype")
-            if vim.tbl_contains({ "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte" }, ft) then
+            local ft = vim.api.nvim_buf_get_option(bufnr, 'filetype')
+            if vim.tbl_contains({ 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'vue', 'svelte' }, ft) then
                 vim.lsp.buf.format({
                     async = false,
                     filter = function(client)
-                        return client.name == "null-ls"
+                        return client.name == 'null-ls'
                     end,
                 })
             else
@@ -118,6 +119,27 @@ lspconfig.basedpyright.setup(create_config(function(config)
                 useLibraryCodeForTypes = true,
                 diagnosticMode = 'openFilesOnly',
                 typeCheckingMode = 'off'
+            },
+        },
+    }
+    return config
+end))
+
+lspconfig.svelte.setup(create_config(function(config)
+    config.root_dir = lspconfig.util.root_pattern('svelte.config.js', 'svelte.config.cjs', 'package.json', '.git')
+    config.settings = {
+        svelte = {
+            plugin = {
+                svelte = {
+                    format = {
+                        enable = true, -- Enable Svelte formatter
+                    },
+                },
+                typescript = {
+                    diagnostics = {
+                        enable = true, -- Enable TypeScript diagnostics in Svelte files
+                    },
+                },
             },
         },
     }
