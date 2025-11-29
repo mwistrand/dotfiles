@@ -49,3 +49,7 @@ autoload -U +X bashcompinit && bashcompinit
 
 # opencode
 export PATH=/Users/mwistrand/.opencode/bin:$PATH
+
+# Add JBang to environment
+alias j!=jbang
+export PATH="$HOME/.jbang/bin:$PATH"
