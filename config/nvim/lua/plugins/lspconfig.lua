@@ -80,13 +80,13 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_create_autocmd('BufWritePre', {
         buffer = bufnr,
         callback = function()
-            -- Only format JS/TS files with null-ls (Prettier)
+            -- Only format JS/TS files with null-ls (Prettier) or eslint
             local ft = vim.api.nvim_buf_get_option(bufnr, 'filetype')
             if vim.tbl_contains({ 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'vue', 'svelte' }, ft) then
                 vim.lsp.buf.format({
                     async = false,
-                    filter = function(client)
-                        return client.name == 'null-ls'
+                    filter = function(c)
+                        return c.name == 'null-ls' or c.name == 'eslint'
                     end,
                 })
             else
@@ -204,6 +204,8 @@ lspconfig.eslint.setup(create_config(function(config)
         '.eslintrc.yml',
         '.eslintrc.json',
         'eslint.config.js',
+        'eslint.config.mjs',
+        'eslint.config.ts',
         'package.json'
     )
     config.settings = {
