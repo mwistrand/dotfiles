@@ -19,6 +19,105 @@ local root_dir = require('jdtls.setup').find_root(root_markers)
 -- current project found using the root_marker as the folder for project specific data.
 local workspace_folder = home .. '/.local/share/eclipse/' .. vim.fn.fnamemodify(root_dir, ':p:h:t')
 
+-- Check if a directory contains a Quarkus project
+local function check_quarkus_in_dir(dir)
+	local pom_path = dir .. '/pom.xml'
+	local gradle_path = dir .. '/build.gradle'
+
+	-- Check pom.xml for Quarkus dependency
+	if vim.fn.filereadable(pom_path) == 1 then
+		local pom_content = vim.fn.readfile(pom_path)
+		for _, line in ipairs(pom_content) do
+			if line:match('quarkus') then
+				return 'quarkus'
+			end
+		end
+	end
+
+	-- Check build.gradle for Quarkus dependency
+	if vim.fn.filereadable(gradle_path) == 1 then
+		local gradle_content = vim.fn.readfile(gradle_path)
+		for _, line in ipairs(gradle_content) do
+			if line:match('quarkus') then
+				return 'quarkus'
+			end
+		end
+	end
+
+	return nil
+end
+
+-- Check if a directory contains a Spring Boot project
+local function check_spring_in_dir(dir)
+	local pom_path = dir .. '/pom.xml'
+	local gradle_path = dir .. '/build.gradle'
+
+	-- Check pom.xml for Spring Boot dependency
+	if vim.fn.filereadable(pom_path) == 1 then
+		local pom_content = vim.fn.readfile(pom_path)
+		for _, line in ipairs(pom_content) do
+			if line:match('spring%-boot') then
+				return 'spring'
+			end
+		end
+	end
+
+	-- Check build.gradle for Spring Boot dependency
+	if vim.fn.filereadable(gradle_path) == 1 then
+		local gradle_content = vim.fn.readfile(gradle_path)
+		for _, line in ipairs(gradle_content) do
+			if line:match('spring%-boot') or line:match('org%.springframework%.boot') then
+				return 'spring'
+			end
+		end
+	end
+
+	return nil
+end
+
+-- Detect project type in a directory (returns 'quarkus', 'spring', or nil)
+local function detect_project_type(dir)
+	return check_quarkus_in_dir(dir) or check_spring_in_dir(dir)
+end
+
+-- Find all Java subprojects in the workspace
+local function find_java_subprojects()
+	local projects = {}
+
+	-- Check root directory first
+	local root_type = detect_project_type(root_dir)
+	if root_type then
+		table.insert(projects, {
+			path = root_dir,
+			name = vim.fn.fnamemodify(root_dir, ':t'),
+			type = root_type,
+		})
+	end
+
+	-- Scan immediate subdirectories for subprojects
+	local handle = vim.loop.fs_scandir(root_dir)
+	if handle then
+		while true do
+			local name, type = vim.loop.fs_scandir_next(handle)
+			if not name then break end
+
+			if type == 'directory' and not name:match('^%.') then
+				local subdir = root_dir .. '/' .. name
+				local subproject_type = detect_project_type(subdir)
+				if subproject_type then
+					table.insert(projects, {
+						path = subdir,
+						name = name,
+						type = subproject_type,
+					})
+				end
+			end
+		end
+	end
+
+	return projects
+end
+
 -- Every time this is called, it either starts the debugger and executes the main code path,
 -- or displays a window of options if a session has already started.
 function create_connect_debugger_cmd(is_debug)
@@ -37,6 +136,59 @@ function create_connect_debugger_cmd(is_debug)
 				end
 			end
 		})
+	end
+end
+
+-- Attach to a running Quarkus dev mode session (port 5005 by default)
+local function attach_quarkus_debugger(project_name)
+	local name = project_name and ('Attach to Quarkus: ' .. project_name) or 'Attach to Quarkus Dev Mode'
+	dap.run({
+		type = 'java',
+		request = 'attach',
+		name = name,
+		hostName = 'localhost',
+		port = 5005,
+		vmArgs = '-Djava.rmi.server.hostname=localhost -Dquarkus.profile=local,private',
+	})
+
+	dap.listeners.after.event_initialized['dotfiles'] = function()
+		ui.open_footer()
+	end
+end
+
+-- Start debugging for a specific project
+local function start_debug_for_project(project, is_debug)
+	if project.type == 'quarkus' then
+		attach_quarkus_debugger(project.name)
+	else
+		create_connect_debugger_cmd(is_debug)()
+	end
+end
+
+-- Smart debug command: detects subprojects and prompts if multiple found
+local function create_smart_debug_cmd(is_debug)
+	return function()
+		local projects = find_java_subprojects()
+
+		if #projects == 0 then
+			-- No specific framework detected, fall back to default behavior
+			create_connect_debugger_cmd(is_debug)()
+		elseif #projects == 1 then
+			-- Single project found, start it directly
+			start_debug_for_project(projects[1], is_debug)
+		else
+			-- Multiple projects found, prompt for selection
+			vim.ui.select(projects, {
+				prompt = 'Select project to debug:',
+				format_item = function(project)
+					return string.format('[%s] %s', project.type, project.name)
+				end,
+			}, function(selected)
+				if selected then
+					start_debug_for_project(selected, is_debug)
+				end
+			end)
+		end
 	end
 end
 
@@ -59,8 +211,9 @@ local on_attach = function(client, bufnr)
 	nnoremap('<LocalLeader>rec', jdtls.extract_constant, opts)
 	vnoremap('<LocalLeader>rem', [[<ESC><CMD>lua require('jdtls').extract_method(true)<CR>]], opts)
 
-	nnoremap('<LocalLeader>c', create_connect_debugger_cmd(true), opts)
+	nnoremap('<LocalLeader>c', create_smart_debug_cmd(true), opts)
 	nnoremap('<LocalLeader>s', create_connect_debugger_cmd(false), opts)
+	nnoremap('<LocalLeader>da', function() attach_quarkus_debugger() end, opts) -- Explicitly attach to Quarkus/remote debugger
 
 	nnoremap('<LocalLeader>tc', jdtls.test_class, opts)
 	nnoremap('<LocalLeader>tn', jdtls.test_nearest_method, opts)
