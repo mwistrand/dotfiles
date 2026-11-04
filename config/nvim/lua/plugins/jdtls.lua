@@ -304,6 +304,10 @@ local jdtls_config = {
 						name = 'JavaSE-24',
 						path = home .. '/.asdf/installs/java/openjdk-24',
 					},
+					{
+						name = 'JavaSE-25',
+						path = home .. '/.asdf/installs/java/openjdk-25',
+					},
 				}
 			}
 		}
@@ -315,7 +319,7 @@ local jdtls_config = {
 	-- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
 	-- for the full list of options
 	cmd = {
-		home .. '/.asdf/installs/java/openjdk-24/bin/java',
+		home .. '/.asdf/installs/java/openjdk-25/bin/java',
 		'-Declipse.application=org.eclipse.jdt.ls.core.id1',
 		'-Dosgi.bundles.defaultStartLevel=4',
 		'-Declipse.product=org.eclipse.jdt.ls.core.product',

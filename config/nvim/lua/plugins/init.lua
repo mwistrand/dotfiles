@@ -117,13 +117,6 @@ require('lazy').setup({
 		end,
 	},
 
-	-- syntax highlighting
-	{
-		"nvim-treesitter/nvim-treesitter",
-		build = ":TSUpdate",
-		dependencies = { "nvim-treesitter/playground", }
-	},
-
 	-- completion
 	{
 		'hrsh7th/nvim-cmp',
@@ -204,7 +197,7 @@ require('lazy').setup({
 	'mfussenegger/nvim-dap',
 
 	-- Rust
-	'simrat39/rust-tools.nvim',
+	{ 'mrcjkb/rustaceanvim', lazy = false },
 
 	-- Diagnostics
 	{
@@ -235,74 +228,6 @@ require('lazy').setup({
 			utils.imap('<C-x>','<Plug>(UnicodeFuzzy)', { expr = false })
 		end
 	},
-
-	-- AI Assistance
-	{ 'zbirenbaum/copilot.lua' },
-
-	{
-		'olimorris/codecompanion.nvim',
-		dependencies = {
-			'nvim-lua/plenary.nvim',
-			'nvim-treesitter/nvim-treesitter',
-			{
-				'MeanderingProgrammer/render-markdown.nvim',
-				ft = { 'codecompanion' }
-			},
-			{
-				'echasnovski/mini.diff',
-				config = function()
-					local diff = require('mini.diff')
-					diff.setup({
-						-- Disabled by default
-						source = diff.gen_source.none(),
-					})
-				end,
-			},
-		},
-		init = function()
-			cmd([[cab cc CodeCompanion]])
-		end,
-		opts = {
-			display = {
-				action_palette = {
-					provider = 'telescope',
-				},
-				chat = {
-					window = {
-						full_height = true,
-						width = 0.4,
-					}
-				},
-				diff = {
-					provider = 'mini_diff',
-				},
-			},
-			opts = {
-				log_level = 'DEBUG',
-			},
-		},
-		keys = {
-			{
-				'<Leader>aa',
-				'<cmd>CodeCompanionChat Toggle<CR>',
-				desc = 'Toggle a chat buffer',
-				mode = { 'n', 'v' },
-			},
-			{
-				'<Leader>ac',
-				'<cmd>CodeCompanionChat Add<CR>',
-				desc = 'Add code to a chat buffer',
-				mode = { 'v' },
-			},
-			{
-				'<Leader>ax',
-				'<cmd>CodeCompanionActions<CR>',
-				desc = 'Open the action palette',
-				mode = { 'n', 'v' },
-			},
-		},
-	},
-
 })
 
 if fn.executable('rg') then
@@ -313,11 +238,8 @@ require('plugins.formatter')
 require('plugins.fzf')
 require('plugins.lspconfig')
 require('plugins.cmp')
-require('plugins.ai')
 require('plugins.dap')
 require('plugins.jdtls')
 require('plugins.lualine')
 require('plugins.nvimtree')
-require('plugins.rust-tools')
 require('plugins.telescope')
-require('plugins.treesitter')

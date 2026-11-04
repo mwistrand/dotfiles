@@ -89,7 +89,7 @@ In `git/gitconfig.symlink`:
 - Terminal emulators: ghostty, wezterm
 - Fonts: JetBrains Mono, 3270 Nerd Font
 - Core tools: neovim, tmux, fzf, ripgrep, fd, bat, gh
-- Language tools: jdtls, ltex-ls, rust, clojure, postgresql
+- Language tools: jdtls, rust, clojure, postgresql
 - Version managers: asdf, fnm, uv
 
 To install: `brew bundle` (on macOS)
