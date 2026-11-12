@@ -25,6 +25,9 @@ export PATH=$PATH:$GOPATH/bin
 # iced repl
 export PATH=$PATH:$HOME/.local/share/nvim/lazy/vim-iced/bin
 
+# Kubernetes
+alias k="kubectl"
+
 # Git aliases
 alias gac="git add . && git commit"
 alias gs="git status"
